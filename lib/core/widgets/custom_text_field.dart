@@ -1,15 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:clinic/core/utils/app_text_styles.dart';
+import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField(
+  CustomTextFormField(
       {super.key,
       required this.hintText,
       required this.textInputType,
+      this.controller,
       this.suffixIcon,
       this.onSaved,
+      this.maxLines,
       this.obscureText = false});
+  final TextEditingController? controller;
+  int? maxLines;
   final String hintText;
   final TextInputType textInputType;
   final Widget? suffixIcon;
@@ -18,6 +21,8 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      maxLines: maxLines ?? 1,
       obscureText: obscureText,
       onSaved: onSaved,
       validator: (value) {

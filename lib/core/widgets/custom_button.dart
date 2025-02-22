@@ -1,11 +1,12 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:clinic/core/utils/app_colors.dart';
 import 'package:clinic/core/utils/app_text_styles.dart';
+import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.onPressed, required this.text});
+  CustomButton(
+      {super.key, required this.onPressed, required this.text, this.color});
   final VoidCallback onPressed;
+  Color? color;
   final String text;
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,8 @@ class CustomButton extends StatelessWidget {
               16,
             ),
           ),
-          backgroundColor: AppColors.primaryColor,
+          backgroundColor: color ?? AppColors.primaryColor,
+          foregroundColor: Colors.white, //
         ),
         onPressed: onPressed,
         child: Text(

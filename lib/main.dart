@@ -3,9 +3,13 @@ import 'package:clinic/core/utils/app_colors.dart';
 import 'package:clinic/features/splash/presentation/views/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  initializeDateFormatting('ar', '').then((value) => null);
+  initializeDateFormatting('en', '').then((value) => null);
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
