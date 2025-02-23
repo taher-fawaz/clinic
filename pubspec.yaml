@@ -44,6 +44,11 @@ dependencies:
   modal_progress_hud_nsn: ^0.5.1
   shared_preferences: ^2.5.2
   time_slot: ^1.0.2
+  sign_in_with_apple: ^6.1.4
+  persistent_bottom_nav_bar: ^6.2.1
+  flutter_facebook_auth: ^7.1.1
+  flutter_bloc: ^9.0.0
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_launcher_icons: "^0.14.3"

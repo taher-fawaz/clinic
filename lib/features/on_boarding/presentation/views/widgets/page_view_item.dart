@@ -1,4 +1,7 @@
+import 'package:clinic/constants.dart';
+import 'package:clinic/core/services/shared_preferences_singleton.dart';
 import 'package:clinic/core/utils/app_text_styles.dart';
+import 'package:clinic/features/auth/presentation/views/signin_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -27,11 +30,11 @@ class PageviewItem extends StatelessWidget {
             visible: isVisible,
             child: GestureDetector(
               onTap: () {
-                // Prefs.setBool(kIsOnBoardingViewSeen, true);
+                Prefs.setBool(kIsOnBoardingViewSeen, true);
 
-                // Navigator.of(context).pushReplacementNamed(
-                //   SigninView.routeName,
-                // );
+                Navigator.of(context).pushReplacementNamed(
+                  SigninView.routeName,
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.all(16),
