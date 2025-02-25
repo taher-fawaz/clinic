@@ -38,7 +38,7 @@ class _TermsAndConditionsWidgetState extends State<TermsAndConditionsWidget> {
                 TextSpan(
                   text: 'من خلال إنشاء حساب ، فإنك توافق على ',
                   style: TextStyles.semiBold13.copyWith(
-                    color: const Color(0xFF949D9E),
+                    color: const Color.fromARGB(255, 95, 95, 95),
                   ),
                 ),
                 TextSpan(
