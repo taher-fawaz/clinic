@@ -4,19 +4,23 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a2e846c-a846-4423-aedf-c1dd5f7f2892" name="Changes" comment=" initialization fire base">
-      <change afterPath="$PROJECT_DIR$/lib/features/booking/booking_view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/booking/views/widgets/bookingViewBody.dart" afterDir="false" />
+    <list default="true" id="4a2e846c-a846-4423-aedf-c1dd5f7f2892" name="Changes" comment="build stepper view">
+      <change afterPath="$PROJECT_DIR$/lib/features/booking/views/actionConfirm.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/features/booking/views/widgets/stepper/steps/stepThree.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/helper_functions/on_generate_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/helper_functions/on_generate_routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/widgets/custom_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/widgets/custom_button.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/widgets/custom_text_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/widgets/custom_text_field.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/utils/app_images.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/utils/app_images.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/booking/views/widgets/stepper/stepperView.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/booking/views/widgets/stepper/stepperView.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/booking/views/widgets/stepper/steps/stepTwo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/booking/views/widgets/stepper/steps/stepTwo.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/features/on_boarding/presentation/views/widgets/on_boarding_view_body.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/on_boarding/presentation/views/widgets/on_boarding_view_body.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/on_boarding/presentation/views/widgets/page_view_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/on_boarding/presentation/views/widgets/page_view_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

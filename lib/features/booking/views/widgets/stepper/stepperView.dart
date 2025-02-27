@@ -1,7 +1,9 @@
 import 'package:clinic/features/booking/views/widgets/stepper/steps/stepTwo.dart';
 import 'package:flutter/material.dart';
 
+import '../../actionConfirm.dart';
 import 'steps/StepOne.dart';
+import 'steps/stepThree.dart';
 
 class CustomStepper extends StatefulWidget {
   const CustomStepper({super.key});
@@ -22,6 +24,12 @@ class _CustomStepperState extends State<CustomStepper> {
           setState(() {
             _currentStep += 1;
           });
+        } else {
+          // Navigate to the new screen when the last step is completed
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ActionConfirm()),
+          );
         }
       },
       onStepCancel: () {
@@ -49,7 +57,7 @@ class _CustomStepperState extends State<CustomStepper> {
         ),
         Step(
           title: Text("Step 3"),
-          content: Text("This is the final step"),
+          content: StepThree(),
           isActive: _currentStep >= 2,
         ),
       ],

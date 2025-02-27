@@ -1,8 +1,6 @@
 import 'package:clinic/constants.dart';
-import 'package:clinic/core/services/shared_preferences_singleton.dart';
 import 'package:clinic/core/utils/app_colors.dart';
 import 'package:clinic/core/widgets/custom_button.dart';
-import 'package:clinic/features/auth/presentation/views/signin_view.dart';
 import 'package:clinic/features/booking/booking_view.dart';
 import 'package:clinic/features/on_boarding/presentation/views/widgets/on_boarding_page_view.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -73,9 +71,9 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             ),
             child: CustomButton(
               onPressed: () async {
-                await Prefs.setBool(kIsOnBoardingViewSeen, true);
+                // await Prefs.setBool(kIsOnBoardingViewSeen, true);
                 await Navigator.of(context)
-                    .pushReplacementNamed(SigninView.routeName);
+                    .pushReplacementNamed(BookingView.routeName);
               },
               text: 'ابدأ الان',
             ),
