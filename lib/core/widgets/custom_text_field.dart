@@ -7,12 +7,16 @@ class CustomTextFormField extends StatelessWidget {
       required this.hintText,
       required this.textInputType,
       this.controller,
+      this.label,
       this.suffixIcon,
       this.onSaved,
       this.maxLines,
+      this.border,
       this.obscureText = false});
   final TextEditingController? controller;
   int? maxLines;
+  String? label;
+  bool? border = true;
   final String hintText;
   final TextInputType textInputType;
   final Widget? suffixIcon;
@@ -33,16 +37,17 @@ class CustomTextFormField extends StatelessWidget {
       },
       keyboardType: textInputType,
       decoration: InputDecoration(
+        label: Text(label ?? ""),
         suffixIcon: suffixIcon,
         hintStyle: TextStyles.bold13.copyWith(
           color: const Color(0xFF949D9E),
         ),
         hintText: hintText,
         filled: true,
-        fillColor: const Color(0xFFF9FAFA),
-        border: buildBorder(),
-        enabledBorder: buildBorder(),
-        focusedBorder: buildBorder(),
+        fillColor: Color(0xFFF9FAFA),
+        border: (border ?? true) ? buildBorder() : null,
+        enabledBorder: (border ?? true) ? buildBorder() : null,
+        focusedBorder: (border ?? true) ? buildBorder() : null,
       ),
     );
   }

@@ -1,22 +1,20 @@
 import 'package:clinic/core/helper_functions/build_error_bar.dart';
 import 'package:clinic/core/utils/app_colors.dart';
 import 'package:clinic/core/utils/app_text_styles.dart';
-import 'package:clinic/core/widgets/custom_button.dart';
-import 'package:clinic/core/widgets/custom_text_field.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:time_slot/controller/day_part_controller.dart';
 import 'package:time_slot/model/time_slot_Interval.dart';
 import 'package:time_slot/time_slot_from_interval.dart';
 
-class BookingViewBody extends StatefulWidget {
-  const BookingViewBody({super.key});
+class StepOne extends StatefulWidget {
+  const StepOne({super.key});
 
   @override
-  State<BookingViewBody> createState() => _BookingViewBodyState();
+  State<StepOne> createState() => _StepOneState();
 }
 
-class _BookingViewBodyState extends State<BookingViewBody> {
+class _StepOneState extends State<StepOne> {
   bool pending = true;
   List<DateTime> selectTime = [];
   DateTime selectedDate = DateTime.now();
@@ -25,45 +23,47 @@ class _BookingViewBodyState extends State<BookingViewBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      reverse: true,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Card(
-              child: dateWidget(),
-            ),
-            Card(child: timeWidget()),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "ملاحظات",
-              style: TextStyles.bold23,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CustomTextFormField(
-              controller: controller,
-              hintText: "أكتب الشكوي ",
-              textInputType: TextInputType.text,
-              maxLines: 5,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            CustomButton(
-              color:
-                  pending ? AppColors.primaryColor : AppColors.secondaryColor,
-              onPressed: () => _validateAndSubmit(),
-              text: pending ? 'أحجز الأن' : "أنتظر الموافقه",
-            ),
-          ],
-        ),
-      ),
-    );
+        reverse: true,
+        child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              child: Column(
+                children: [
+                  dateWidget(),
+                  timeWidget(),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  // Text(
+                  //   "ملاحظات",
+                  //   style: TextStyles.bold23,
+                  // ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
+                  //     CustomTextFormField(
+                  //       controller: controller,
+                  //       hintText: "أكتب الشكوي ",
+                  //       textInputType: TextInputType.text,
+                  //       maxLines: 5,
+                  //     ),
+                  //     SizedBox(
+                  //       height: 10,
+                  //     ),
+                  //   ],
+                  // )),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  // CustomButton(
+                  //   color:
+                  //       pending ? AppColors.primaryColor : AppColors.secondaryColor,
+                  //   onPressed: () => _validateAndSubmit(),
+                  //   text: pending ? 'أحجز الأن' : "أنتظر الموافقه",
+                  //  ),
+                ],
+              ),
+            )));
   }
 
   Widget dateWidget() {
