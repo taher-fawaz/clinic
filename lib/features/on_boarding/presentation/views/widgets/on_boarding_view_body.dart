@@ -72,11 +72,10 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
               horizontal: kHorizintalPadding,
             ),
             child: CustomButton(
-              onPressed: () {
-                Prefs.setBool(kIsOnBoardingViewSeen, true);
-                Navigator.of(context).pushReplacementNamed(
-                  SigninView.routeName,
-                );
+              onPressed: () async {
+                await Prefs.setBool(kIsOnBoardingViewSeen, true);
+                await Navigator.of(context)
+                    .pushReplacementNamed(SigninView.routeName);
               },
               text: 'ابدأ الان',
             ),
