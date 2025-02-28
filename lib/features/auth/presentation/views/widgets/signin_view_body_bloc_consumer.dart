@@ -1,3 +1,5 @@
+import 'package:clinic/core/widgets/bottom_nav_bar.dart';
+import 'package:clinic/features/main_view/presentation/pages/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clinic/core/helper_functions/build_error_bar.dart';
@@ -18,7 +20,7 @@ class SigninViewBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<SigninCubit, SigninState>(
       listener: (context, state) {
         if (state is SigninSuccess) {
-          // Navigator.pushNamed(context, MainView.routeName);
+          Navigator.pushNamed(context, MainView.routeName);
         }
 
         if (state is SigninFailure) {
