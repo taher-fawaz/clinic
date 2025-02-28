@@ -1,3 +1,4 @@
+import 'package:clinic/core/utils/app_images.dart';
 import 'package:clinic/features/profile/presentation/pages/userSettings.dart';
 import 'package:clinic/features/profile/presentation/widgets/appointments_list.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -90,7 +92,9 @@ class _ProfileViewState extends State<ProfileView> {
                     child: CircleAvatar(
                       radius: 80,
                       backgroundColor: Colors.white,
-                      backgroundImage: AssetImage('assets/person.jpg'),
+                      child: SvgPicture.asset(
+                        Assets.imagesProfile,
+                      ),
                     ),
                     decoration: BoxDecoration(
                         border: Border.all(

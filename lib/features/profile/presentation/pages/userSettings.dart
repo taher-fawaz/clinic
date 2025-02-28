@@ -1,4 +1,5 @@
 import 'package:clinic/features/auth/domain/entites/user_entity.dart';
+import 'package:clinic/features/auth/presentation/views/signin_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -63,8 +64,8 @@ class _UserSettingsState extends State<UserSettings> {
             ),
             child: TextButton(
               onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
+                Navigator.pushReplacementNamed(context, SigninView.routeName);
+
                 _signOut();
               },
               child: Text(
