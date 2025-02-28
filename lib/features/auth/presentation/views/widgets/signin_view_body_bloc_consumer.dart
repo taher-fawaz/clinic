@@ -1,4 +1,3 @@
-import 'package:clinic/core/widgets/bottom_nav_bar.dart';
 import 'package:clinic/features/main_view/presentation/pages/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
