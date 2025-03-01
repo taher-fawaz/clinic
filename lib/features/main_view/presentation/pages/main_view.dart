@@ -1,8 +1,9 @@
-import 'package:clinic/features/booking/booking_view.dart';
 import 'package:clinic/features/home/presentation/pages/home_view.dart';
 import 'package:clinic/features/profile/presentation/pages/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+
+import '../../../booking/presentation/views/booking_view.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});

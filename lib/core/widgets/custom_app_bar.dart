@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:clinic/core/widgets/notification_widget.dart';
+import 'package:flutter/material.dart';
 
 import '../utils/app_text_styles.dart';
 
-AppBar buildAppBar(context,
+AppBar CustomBuildAppBar(context,
     {required String title,
     bool showBackButton = true,
     bool showNotification = true}) {

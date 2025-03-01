@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:clinic/constants.dart';
 import 'package:clinic/core/errors/exceptions.dart';
 import 'package:clinic/core/errors/failures.dart';
@@ -13,25 +11,25 @@ import 'package:clinic/core/utils/backend_endpoint.dart';
 import 'package:clinic/features/auth/data/models/user_model.dart';
 import 'package:clinic/features/auth/domain/entites/user_entity.dart';
 import 'package:clinic/features/auth/domain/repos/auth_repo.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepoImpl extends AuthRepo {
   final FirebaseAuthService firebaseAuthService;
   final DatabaseService databaseService;
-
+  User? user;
   AuthRepoImpl(
       {required this.databaseService, required this.firebaseAuthService});
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
       String email, String password, String name) async {
-    User? user;
     try {
       user = await firebaseAuthService.createUserWithEmailAndPassword(
           email: email, password: password);
       var userEntity = UserEntity(
         name: name,
         email: email,
-        uId: user.uid,
+        uId: user!.uid,
       );
       await addUserData(user: userEntity);
       return right(userEntity);

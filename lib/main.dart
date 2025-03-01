@@ -15,6 +15,9 @@ void main() async {
   initializeDateFormatting('ar', '').then((value) => null);
   initializeDateFormatting('en', '').then((value) => null);
   await Firebase.initializeApp();
+  setupGetit();
+  WidgetsFlutterBinding.ensureInitialized();
+
   Bloc.observer = CustomBlocObserver();
 
   await Prefs.init();
