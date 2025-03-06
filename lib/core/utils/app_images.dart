@@ -18,6 +18,8 @@ class Assets {
   /// assets/images/boarding-3.png
   static const String imagesBoarding3 = "assets/images/boarding-3.png";
 
+  static const String imagesWaiting = "assets/images/waiting.png";
+
   /// Assets for imagesCheck
   /// assets/images/Check.svg
   static const String imagesCheck = "assets/images/Check.svg";
@@ -86,4 +88,3 @@ class Assets {
   /// assets/images/trash.svg
   static const String imagesTrash = "assets/images/trash.svg";
 }
-

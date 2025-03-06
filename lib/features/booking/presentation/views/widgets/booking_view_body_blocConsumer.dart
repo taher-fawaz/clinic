@@ -1,5 +1,5 @@
 import 'package:clinic/features/booking/presentation/views/widgets/stepper/stepperView.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/helper_functions/build_error_bar.dart';
@@ -22,7 +22,10 @@ class _BookingViewBodyBlocconsumerState
     return BlocConsumer<BookingCubit, BookingState>(
       listener: (context, state) {
         if (state is BookingSuccess) {
-          Navigator.pushNamed(context, ActionConfirm.routeName);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ActionConfirm()),
+          );
         }
 
         if (state is BookingFailure) {
