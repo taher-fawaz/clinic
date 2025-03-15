@@ -1,4 +1,4 @@
-class BookingRepo {
+abstract class BookingRepo {
   Future<void> addBooking(
       {required String name,
       required String address,
@@ -8,9 +8,8 @@ class BookingRepo {
       required String imageThree,
       required String age,
       required DateTime dateDay,
-      required List<DateTime> dateTime,
-      required String note}) {
+      required String dateTime,
+      required String note}) ;
     // TODO: implement addBooking
-    throw UnimplementedError();
-  }
+  Future<List<DateTime>> getTimeForToday(context,DateTime dateNow);
 }

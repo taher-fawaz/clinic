@@ -8,7 +8,7 @@ class PatientModel {
   String imageThree;
   String age;
   DateTime dateDay;
-  List<DateTime> dateTime;
+  String dateTime;
   String note;
 
   PatientModel({
@@ -37,9 +37,8 @@ class PatientModel {
       "imageThree": imageThree,
       "age": age,
       "dateDay": dateDay.toIso8601String(), // Convert DateTime to String
-      "dateTime": dateTime
-          .map((date) => date.toIso8601String())
-          .toList(), // Convert List<DateTime> to List<String>
+      "dateTime": dateTime,
+
       "note": note,
     };
   }
@@ -56,10 +55,7 @@ class PatientModel {
       imageThree: json["imageThree"],
       age: json["age"],
       dateDay: DateTime.parse(json["dateDay"]), // Convert String to DateTime
-      dateTime: (json["dateTime"] as List<dynamic>)
-          .map((date) =>
-              DateTime.parse(date)) // Convert List<String> to List<DateTime>
-          .toList(),
+      dateTime: json["dateTime"] ,
       note: json["note"],
     );
   }
