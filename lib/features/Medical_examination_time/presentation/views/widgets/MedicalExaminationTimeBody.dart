@@ -8,7 +8,6 @@ import '../../../../../core/widgets/custom_button.dart';
 import '../../cubits/medical_examination_time_cubit.dart';
 
 class MedicalExaminationTimeBody extends StatefulWidget {
-  DateTime? selectedDate;
   MedicalExaminationTimeBody({super.key});
 
   @override
@@ -25,7 +24,7 @@ class _MedicalExaminationTimeBodyState extends State<MedicalExaminationTimeBody>
               dateWidget(),
               timeWidget(),
               CustomButton(onPressed: () {
-                context.read<MedicalExaminationTimeCubit>().saveTime(context,widget.selectedDate??DateTime.now());
+                context.read<MedicalExaminationTimeCubit>().saveTime(context);
 
                 }
                 , text: "Save Time",),
@@ -55,7 +54,7 @@ class _MedicalExaminationTimeBodyState extends State<MedicalExaminationTimeBody>
       ),
       onDateChange: (value) {
         print("Selected Date: $widget.selectedDate");
-        widget.selectedDate = value;
+        context.read<MedicalExaminationTimeCubit>().selectedDate = value;
       },
     );
   }
@@ -72,7 +71,7 @@ class _MedicalExaminationTimeBodyState extends State<MedicalExaminationTimeBody>
                   // widget.chooseTIME[index]
                   ?
               "اختر الوقت":"Time :${context.read<MedicalExaminationTimeCubit>().selectedTimes[index].format(context)
-                  // widget._selectedTimes[index].format(context)
+
                 } ",
                   style: TextStyle(fontSize: 18)),
               trailing: ElevatedButton(

@@ -5,7 +5,7 @@ import 'package:clinic/features/on_boarding/presentation/views/on_boarding_view.
 import 'package:clinic/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/booking/presentation/views/actionConfirm.dart';
+import '../../features/actionConfirm/actionConfirm.dart';
 import '../../features/booking/presentation/views/booking_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {

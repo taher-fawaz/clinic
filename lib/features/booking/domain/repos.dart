@@ -1,6 +1,8 @@
 abstract class BookingRepo {
   Future<void> addBooking(
-      {required String name,
+
+      {required String selectPatient,
+          required String name,
       required String address,
       required String phone,
       required String imageOne,

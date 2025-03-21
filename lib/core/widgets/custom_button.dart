@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   CustomButton(
-      {super.key, required this.onPressed, required this.text, this.color});
+      {super.key, required this.onPressed, required this.text, this.color,this.width});
   final VoidCallback onPressed;
+  double? width;
   Color? color;
   final String text;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width:width?? double.infinity,
       height: 54,
       child: TextButton(
         style: TextButton.styleFrom(

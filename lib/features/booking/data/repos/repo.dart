@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/errors/failures.dart';
-import '../../../../core/helper_functions/build_error_bar.dart';
 import '../../domain/repos.dart';
 import '../model/patient_model.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +10,9 @@ import 'package:intl/intl.dart';
 
 class FirebaseBookingRepo implements BookingRepo {
   @override
-  Future<Either<Failure, PatientModel>> addBooking({required String name,
+  Future<Either<Failure, PatientModel>> addBooking({
+    required String selectPatient,
+    required String name,
     required String address,
     required String phone,
     required String imageOne,
@@ -24,7 +24,8 @@ class FirebaseBookingRepo implements BookingRepo {
     required String note}) async {
     try {
       final String authId = FirebaseAuth.instance.currentUser!.uid;
-      final PatientModel patient = PatientModel(
+      final PatientModel patientt = PatientModel(
+          selectPatient:selectPatient,
           name: name,
           address: address,
           phone: phone,
@@ -39,8 +40,8 @@ class FirebaseBookingRepo implements BookingRepo {
       await FirebaseFirestore.instance
           .collection("patient")
           .doc(authId)
-          .set(patient.toJson());
-      return right(patient);
+          .set(patientt.toJson());
+      return right(patientt);
     } on CustomException catch (e) {
       return left(ServerFailure(e.message));
     } catch (e) {

@@ -8,21 +8,11 @@ part 'medical_examination_time_state.dart';
 
 class MedicalExaminationTimeCubit extends Cubit<MedicalExaminationTimeState> {
 
-  MedicalExaminationTimeCubit(this.firebaseMedicalExaminationTimeRepo) : super(MedicalExaminationTimeInitial());
+  MedicalExaminationTimeCubit(this.firebaseMedicalExaminationTimeRepo)  : selectedDate = DateTime.now(), super(MedicalExaminationTimeInitial());
   FirebaseMedicalExaminationTimeRepo firebaseMedicalExaminationTimeRepo;
   List<TimeOfDay> selectedTimes = List.generate(10, (index) => TimeOfDay.now());
   List<bool> chooseTIME = List.generate(10, (index) => true);
-
-
-  // Future<void> createSelectTime(List<String> tasksTime, BuildContext context, DateTime selectedDate) async {
-  //   try {
-  //     emit(MedicalExaminationTimeLoading());
-  //     final result = await firebaseMedicalExaminationTimeRepo.saveTasks(tasksTime, context,selectedDate);
-  //     emit(MedicalExaminationTimeSuccess());
-  //   } catch (e) {
-  //     emit(MedicalExaminationTimeFailure("Unexpected error: $e"));
-  //   }
-  // }
+  DateTime selectedDate;
 
   Future<void> selectTime(BuildContext context, int index) async {
     final TimeOfDay? picked = await showTimePicker(
@@ -36,7 +26,7 @@ class MedicalExaminationTimeCubit extends Cubit<MedicalExaminationTimeState> {
     }
   }
 
-  Future<void> saveTime(context,DateTime selectedDate) async {
+  Future<void> saveTime(context) async {
     emit(MedicalExaminationTimeLoading());
     try{
       List<String> formattedTimes = selectedTimes.asMap().entries.map((entry) {

@@ -10,8 +10,10 @@ class PatientModel {
   DateTime dateDay;
   String dateTime;
   String note;
+  String selectPatient;
 
   PatientModel({
+    required this.selectPatient,
     required this.id,
     required this.name,
     required this.address,
@@ -28,6 +30,7 @@ class PatientModel {
   /// Convert PatientModel to JSON
   Map<String, dynamic> toJson() {
     return {
+      "selectPatient":selectPatient,
       "id": id,
       "name": name,
       "address": address,
@@ -46,6 +49,7 @@ class PatientModel {
   /// Convert JSON to PatientModel
   factory PatientModel.fromJson(Map<String, dynamic> json) {
     return PatientModel(
+      selectPatient:json["selectPatient"],
       id: json["id"],
       name: json["name"],
       address: json["address"],
