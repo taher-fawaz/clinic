@@ -5,7 +5,7 @@ import 'package:clinic/features/on_boarding/presentation/views/on_boarding_view.
 import 'package:clinic/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/actionConfirm/actionConfirm.dart';
+import '../../features/actionConfirm/presentation/view/actionConfirm_view.dart';
 import '../../features/booking/presentation/views/booking_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -23,7 +23,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case MainView.routeName:
       return MaterialPageRoute(builder: (context) => const MainView());
     case ActionConfirm.routeName:
-      return MaterialPageRoute(builder: (context) => const ActionConfirm());
+      return MaterialPageRoute(builder: (context) =>  ActionConfirm());
 
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());

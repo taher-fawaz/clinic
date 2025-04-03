@@ -77,7 +77,6 @@ class FirebaseBookingRepo implements BookingRepo {
             tasks.add(item.toDate());
           } else if (item is String && item.isNotEmpty) {
             try {
-              // Attach today's date to the time string and parse
               String todayDateString = DateFormat('yyyy-MM-dd').format(now);
               DateTime parsedTime =
               DateFormat("yyyy-MM-dd h:mm a").parse("$todayDateString $item");

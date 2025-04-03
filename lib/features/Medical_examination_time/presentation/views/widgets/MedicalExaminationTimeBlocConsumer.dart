@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/helper_functions/build_error_bar.dart';
 import '../../../../../core/widgets/custom_progress_hud.dart';
-import '../../../../actionConfirm/actionConfirm.dart';
+import '../../../../actionConfirm/presentation/view/actionConfirm_view.dart';
 import '../../cubits/medical_examination_time_cubit.dart';
 import 'MedicalExaminationTimeBody.dart';
 
