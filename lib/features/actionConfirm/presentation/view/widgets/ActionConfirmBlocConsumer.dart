@@ -22,9 +22,7 @@ class _ActionConfirmBlocConsumerState extends State<ActionConfirmBlocConsumer> {
     return BlocConsumer<ActionConfirmCubit, ActionConfirmState>(
       listener: (context, state) {
         if (state is ActionConfirmFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
-          );
+
         }
       },
       builder: (context, state) {

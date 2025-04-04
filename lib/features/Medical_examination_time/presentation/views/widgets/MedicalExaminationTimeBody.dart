@@ -25,10 +25,11 @@ class _MedicalExaminationTimeBodyState extends State<MedicalExaminationTimeBody>
               timeWidget(),
               CustomButton(onPressed: () {
                 context.read<MedicalExaminationTimeCubit>().saveTime(context);
+               context.read<MedicalExaminationTimeCubit>().deletePastDays(context);
 
                 }
                 , text: "Save Time",),
-            ],
+             ],
           ),
         )
         ;
@@ -37,6 +38,10 @@ class _MedicalExaminationTimeBodyState extends State<MedicalExaminationTimeBody>
     return EasyDateTimeLine(
       locale: "ar",
       initialDate: DateTime.timestamp(),
+      disabledDates: List.generate(
+        DateTime.now().difference(DateTime(1900)).inDays,
+            (index) => DateTime(1900).add(Duration(days: index)),
+      ),
       activeColor: AppColors.primaryColor,
       headerProps: EasyHeaderProps(
         monthStyle: TextStyle(

@@ -1,7 +1,9 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/helper_functions/build_error_bar.dart';
 import '../../../../../core/utils/app_images.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
@@ -31,21 +33,41 @@ class _ActionConfirmBodyState extends State<ActionConfirmBody> {
             fit: BoxFit.cover,
           ),
           const SizedBox(height: 20),
-          Text(
-            "انتظر الموافقة",
-            style: TextStyles.bold28,
-          ),
-          const SizedBox(height: 20),
           ActionConfirmBlocConsumer(),
           const SizedBox(height: 20),
           CustomButton(
             onPressed: () {
-              context.read<ActionConfirmCubit>().getActionConfirm();
+              deletePastDays(context);
+              // context.read<ActionConfirmCubit>().getActionConfirm();
             },
             text: "تحقق من الحالة",
           ),
         ],
       ),
     );
+  }
+
+
+  Future<void> deletePastDays(BuildContext context) async {
+    try {
+      DateTime now = DateTime.now();
+      String todayFormatted = "${now.year}-${now.month}-${now.day}";
+
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('tasksByDate')
+          .get();
+
+      for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+        String docId = doc.id;
+
+        if (docId.compareTo(todayFormatted) < 0) {
+          await FirebaseFirestore.instance.collection('tasksByDate').doc(docId).delete();
+        }
+      }
+
+      showBar(context, "تم حذف جميع الأيام الماضية بنجاح");
+    } catch (e) {
+      showBar(context, "حدث خطأ أثناء الحذف: ${e.toString()}");
+    }
   }
 }

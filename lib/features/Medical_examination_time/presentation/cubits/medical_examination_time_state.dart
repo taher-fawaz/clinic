@@ -18,3 +18,10 @@ class MedicalExaminationTimeUpdated extends MedicalExaminationTimeState {
 
   MedicalExaminationTimeUpdated(this.selectedTimes, this.chooseTIME);
 }
+final class DeletePastDaysLoading extends MedicalExaminationTimeState {}
+final class DeletePastDaysSuccess extends MedicalExaminationTimeState {}
+final class DeletePastDaysFailure extends MedicalExaminationTimeState {
+  final String message;
+
+  DeletePastDaysFailure(this.message);
+}

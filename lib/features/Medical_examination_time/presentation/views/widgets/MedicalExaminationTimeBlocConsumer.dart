@@ -19,17 +19,20 @@ class _MedicalExaminationTimeBlocConsumerState extends State<MedicalExaminationT
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MedicalExaminationTimeCubit, MedicalExaminationTimeState>(
-      listener: (context, state){
-        if (state is MedicalExaminationTimeSuccess) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ActionConfirm()),
-          );
-        }
-        if (state is MedicalExaminationTimeFailure) {
-          showBar(context, state.message);
-        }
-      },
+        listener: (context, state) {
+          if (state is MedicalExaminationTimeSuccess) {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => ActionConfirm()),
+            // );
+          } else if (state is MedicalExaminationTimeFailure) {
+            showBar(context, state.message);
+          } else if (state is DeletePastDaysSuccess) {
+            print("Past days deleted successfully");
+          } else if (state is DeletePastDaysFailure) {
+            print(state.message);
+          }
+        },
         builder: (context, state) {
       return CustomProgressHud(
         isLoading: state is MedicalExaminationTimeLoading,

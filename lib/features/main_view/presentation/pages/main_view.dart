@@ -34,7 +34,7 @@ class MainView extends StatelessWidget {
     return [
       ActionConfirm(),
       const BookingView(),
-      const AcceptOrCancelReservation(),
+      MedicalExaminationTimeView(),
     ];
   }
 

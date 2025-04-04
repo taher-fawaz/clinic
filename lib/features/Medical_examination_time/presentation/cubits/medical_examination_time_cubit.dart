@@ -41,4 +41,17 @@ class MedicalExaminationTimeCubit extends Cubit<MedicalExaminationTimeState> {
       emit(MedicalExaminationTimeFailure("Failed to save times: $e"));
     }
     }
+
+
+  Future<void> deletePastDays(context) async{
+    emit(DeletePastDaysLoading());
+    try{
+      firebaseMedicalExaminationTimeRepo.deletePastDays( context);
+      emit(DeletePastDaysSuccess());
+    }
+        catch(e){
+          emit(DeletePastDaysFailure("deletePastDays: $e"));
+        }
+  }
+
 }

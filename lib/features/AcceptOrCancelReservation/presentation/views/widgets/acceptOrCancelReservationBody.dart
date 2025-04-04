@@ -1,11 +1,9 @@
-import 'package:clinic/features/AcceptOrCancelReservation/presentation/views/widgets/showDialog.dart';
 import 'package:clinic/features/AcceptOrCancelReservation/presentation/views/widgets/showDialogConsumer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import '../../../../../core/utils/app_text_styles.dart';
-import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/showDilog.dart';
 import '../../../../booking/data/model/patient_model.dart';
 import '../../cuibts/accept_or_cancel_reservation_cubit.dart';
@@ -60,11 +58,12 @@ class _AcceptOrCancelReservationBodyState extends State<AcceptOrCancelReservatio
                       style: TextStyles.bold16,),
                     Text(" الشكوي : ${widget.patients[index].note}",
                       style: TextStyles.bold16,),
-                    Text(" التاريخ : ${widget.patients[index].dateDay}",
-                      style: TextStyles.bold16,),
+                    // Text(" التاريخ : ${widget.patients[index].dateDay}",
+                    //   style: TextStyles.bold16,),
                     Text(" الوقت : ${widget.patients[index].dateTime}",
                       style: TextStyles.bold16,),
-
+                    Text(" التاريخ : ${DateFormat.yMd().format(widget.patients[index].dateDay)}",
+                      style: TextStyles.bold16,),
 
                   ],),
               )

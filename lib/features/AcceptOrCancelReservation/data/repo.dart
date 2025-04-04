@@ -34,11 +34,11 @@ class FirebaseAcceptOrCancelReservationRepo extends AcceptOrCancelReservationRep
   }
 
   @override
-  Future<void> deletePatientDocument(String userId) async {
+  Future<void> deletePatientDocument(String reservationId) async {
     try {
       await FirebaseFirestore.instance
           .collection("patient")
-          .doc(userId)
+          .doc(reservationId)
           .delete();
       print("Document successfully deleted!");
     } catch (e) {
@@ -53,7 +53,6 @@ class FirebaseAcceptOrCancelReservationRepo extends AcceptOrCancelReservationRep
           .collection('reservations') // Changed to a meaningful collection name
           .doc(userId)
           .set({'isAccepted': isAccepted}, SetOptions(merge: true)); // Prevents overwriting existing data
-
       showBar(context, isAccepted ? "تم قبول الحجز بنجاح" : "تم إلغاء الحجز بنجاح");
     } catch (e) {
       showBar(context, "حدث خطأ: ${e.toString()}");
