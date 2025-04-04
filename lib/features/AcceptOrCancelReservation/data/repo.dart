@@ -8,6 +8,8 @@ import '../../booking/data/model/patient_model.dart';
 import '../domain/repo.dart';
 
 class FirebaseAcceptOrCancelReservationRepo extends AcceptOrCancelReservationRepo{
+
+
   @override
   Future<Either<Failure, List<PatientModel>>> getAllPatients() async {
     try {
@@ -30,6 +32,7 @@ class FirebaseAcceptOrCancelReservationRepo extends AcceptOrCancelReservationRep
       );
     }
   }
+
   @override
   Future<void> deletePatientDocument(String userId) async {
     try {
@@ -42,24 +45,19 @@ class FirebaseAcceptOrCancelReservationRepo extends AcceptOrCancelReservationRep
       print("Error deleting document: $e");
     }
   }
+
   @override
-  Future<void> acceptOrCancelReservation(bool acceptOrDelete,context,String userId) async {
-
+  Future<void> acceptOrCancelReservation( bool isAccepted,context, String userId, ) async {
     try {
-      await FirebaseFirestore.instance.collection('acceptOrCancelReservation')
+      await FirebaseFirestore.instance
+          .collection('reservations') // Changed to a meaningful collection name
           .doc(userId)
-          .set({
-        'acceptOrDelete': acceptOrDelete,
+          .set({'isAccepted': isAccepted}, SetOptions(merge: true)); // Prevents overwriting existing data
 
-      });
-      showBar(context, "تم حفظ الوقت بنجاح");
-    }catch(e){
-      showBar(context, "حدث خطأ${e.toString()}");
+      showBar(context, isAccepted ? "تم قبول الحجز بنجاح" : "تم إلغاء الحجز بنجاح");
+    } catch (e) {
+      showBar(context, "حدث خطأ: ${e.toString()}");
+      print("Error: ${e.toString()}");
     }
   }
-
-
-
-
-
 }

@@ -1,3 +1,3 @@
 abstract class  ActionConfirmRepo {
-  Future<bool> getActionConfirm();
+  Future<bool?> getActionConfirm();
 }

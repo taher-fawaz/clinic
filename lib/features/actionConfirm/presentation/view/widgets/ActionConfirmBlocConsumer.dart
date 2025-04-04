@@ -41,13 +41,13 @@ class _ActionConfirmBlocConsumerState extends State<ActionConfirmBlocConsumer> {
             ),
             child: Center(
               child: Text(
-                state.isConfirmed  ? 'تمت الموافقة' : 'في انتظار الموافقة',
+                state.isConfirmed  ? 'تمت الموافقة' : 'تم الرفض',
                 style: TextStyles.bold28,
               ),
             ),
           );
         }
-        return SizedBox();
+        return SizedBox(child: Text( 'في انتظار الموافقة',   style: TextStyles.bold28,),);
       },
     );
   }

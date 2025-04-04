@@ -37,7 +37,6 @@ class _ActionConfirmBodyState extends State<ActionConfirmBody> {
           ),
           const SizedBox(height: 20),
           ActionConfirmBlocConsumer(),
-          // _buildStatusContainer(context),
           const SizedBox(height: 20),
           CustomButton(
             onPressed: () {

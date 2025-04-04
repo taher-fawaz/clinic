@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../core/helper_functions/build_error_bar.dart';
 import '../../../../../core/widgets/custom_button.dart';
-import '../../../../../core/widgets/custom_progress_hud.dart';
 import '../../cuibts/accept_or_cancel_reservation_cubit.dart';
 
 class AcceptOrDeleteBookingBody extends StatefulWidget {
-  String userId;
+  final String userId;
 
   AcceptOrDeleteBookingBody({super.key, required this.userId});
 
@@ -18,28 +15,49 @@ class AcceptOrDeleteBookingBody extends StatefulWidget {
 }
 
 class _AcceptOrDeleteBookingBodyState extends State<AcceptOrDeleteBookingBody> {
+  late final AcceptOrCancelReservationCubit myProvider;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    myProvider = context.read<AcceptOrCancelReservationCubit>();
+     // myProvider.acceptOrCancelReservationAction(true, context, widget.userId);
+  }
+
+  @override
+  void dispose() {
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text("تاكيد الموافقه"),
-      actions: [Row(children: [
+      actions: [
         Row(
           children: [
-            CustomButton(onPressed: () {
-              context.read<AcceptOrCancelReservationCubit>()
-                  .deletePatientDocument(widget.userId);
-              context.read<AcceptOrCancelReservationCubit>().acceptOrCancelReservationAction(true, context,widget.userId);
+            CustomButton(
+              onPressed: () {
+                myProvider.deletePatientDocument(widget.userId);
+                myProvider.acceptOrCancelReservationAction(true, context, widget.userId);
 
-            }, text: "موافقة ", width: 100,),
-            SizedBox(width: 30,),
-            CustomButton(onPressed: () {
-              context.read<AcceptOrCancelReservationCubit>()
-                  .deletePatientDocument(widget.userId);
-              context.read<AcceptOrCancelReservationCubit>().acceptOrCancelReservationAction(false,context,widget.userId);
-            }, text: "رفض ", width: 100),
-          ],)
-      ],)
+              },
+              text: "موافقة ",
+              width: 100,
+            ),
+            SizedBox(width: 30),
+            CustomButton(
+              onPressed: () {
+                myProvider.deletePatientDocument(widget.userId);
+                myProvider.acceptOrCancelReservationAction(false, context, widget.userId);
+              },
+              text: "رفض ",
+              width: 100,
+            ),
+          ],
+        ),
       ],
-    );;
+    );
   }
 }
