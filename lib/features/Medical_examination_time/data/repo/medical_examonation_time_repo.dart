@@ -3,7 +3,7 @@ import 'package:clinic/features/Medical_examination_time/domain/repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../../core/helper_functions/build_error_bar.dart';
 
-class FirebaseMedicalExaminationTimeRepo extends MedicalExaminationTimeRepo{
+class FirebaseMedicalExaminationTimeRepo implements MedicalExaminationTimeRepo{
 
 @override
   Future<void> saveTasks(List<String> tasksTime,context,DateTime selectedDate) async {

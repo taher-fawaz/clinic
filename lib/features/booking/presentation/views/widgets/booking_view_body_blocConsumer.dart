@@ -7,16 +7,16 @@ import '../../../../actionConfirm/presentation/view/actionConfirm_view.dart';
 import '../../cubits/booking_cubit.dart';
 import '../stepper/stepperView.dart';
 
-class BookingViewBodyBlocconsumer extends StatefulWidget {
-  const BookingViewBodyBlocconsumer({super.key});
+class BookingViewBodyBlocConsumer extends StatefulWidget {
+  const BookingViewBodyBlocConsumer({super.key});
 
   @override
-  State<BookingViewBodyBlocconsumer> createState() =>
-      _BookingViewBodyBlocconsumerState();
+  State<BookingViewBodyBlocConsumer> createState() =>
+      _BookingViewBodyBlocConsumerState();
 }
 
-class _BookingViewBodyBlocconsumerState
-    extends State<BookingViewBodyBlocconsumer> {
+class _BookingViewBodyBlocConsumerState
+    extends State<BookingViewBodyBlocConsumer> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BookingCubit, BookingState>(
@@ -26,6 +26,7 @@ class _BookingViewBodyBlocconsumerState
             context,
             MaterialPageRoute(builder: (context) => ActionConfirm()),
           );
+          showBar(context, "تم حجز الموعد بنجاح");
         }
 
         if (state is BookingFailure) {

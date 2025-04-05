@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../domain/repo.dart';
 
-class FirebaseActionConfirmRepo extends ActionConfirmRepo{
+class FirebaseActionConfirmRepo implements ActionConfirmRepo{
+  @override
   Future<bool?> getActionConfirm() async {
     final user = FirebaseAuth.instance.currentUser;
     try {

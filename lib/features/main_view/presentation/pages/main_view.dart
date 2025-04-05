@@ -1,12 +1,9 @@
-import 'package:clinic/features/home/presentation/pages/home_view.dart';
-import 'package:clinic/features/profile/presentation/pages/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-
-import '../../../AcceptOrCancelReservation/presentation/views/acceptOrCancelReservation_view.dart';
-import '../../../Medical_examination_time/presentation/views/MedicalExaminationTimeView.dart';
 import '../../../actionConfirm/presentation/view/actionConfirm_view.dart';
 import '../../../booking/presentation/views/booking_view.dart';
+import '../../../viewPosts/presentation/views/posts.dart';
+
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -34,7 +31,7 @@ class MainView extends StatelessWidget {
     return [
       ActionConfirm(),
       const BookingView(),
-      MedicalExaminationTimeView(),
+      Posts(),
     ];
   }
 

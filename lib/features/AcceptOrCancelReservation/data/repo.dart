@@ -7,7 +7,7 @@ import '../../../core/helper_functions/build_error_bar.dart';
 import '../../booking/data/model/patient_model.dart';
 import '../domain/repo.dart';
 
-class FirebaseAcceptOrCancelReservationRepo extends AcceptOrCancelReservationRepo{
+class FirebaseAcceptOrCancelReservationRepo implements AcceptOrCancelReservationRepo{
 
 
   @override

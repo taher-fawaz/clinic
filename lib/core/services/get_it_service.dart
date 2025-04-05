@@ -9,6 +9,8 @@ import '../../features/AcceptOrCancelReservation/data/repo.dart';
 import '../../features/Medical_examination_time/data/repo/medical_examonation_time_repo.dart';
 import '../../features/actionConfirm/data/repo.dart';
 import '../../features/booking/data/repos/repo.dart';
+import '../../features/createposts/data/repos.dart';
+import '../../features/viewPosts/data/repo.dart';
 
 final getIt = GetIt.instance;
 
@@ -42,5 +44,13 @@ void setupGetit() {
   if (!getIt.isRegistered<FirebaseActionConfirmRepo>()) {
     getIt.registerLazySingleton<FirebaseActionConfirmRepo>(
             () => FirebaseActionConfirmRepo()); // Ensure this is a valid implementation
+  }
+  if (!getIt.isRegistered<FirebasePostsRepo>()) {
+    getIt.registerLazySingleton<FirebasePostsRepo>(
+            () => FirebasePostsRepo()); // Ensure this is a valid implementation
+  }
+  if (!getIt.isRegistered<FirebasePostRepo>()) {
+    getIt.registerLazySingleton<FirebasePostRepo>(
+            () => FirebasePostRepo()); // Ensure this is a valid implementation
   }
 }
