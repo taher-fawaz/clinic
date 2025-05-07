@@ -1,0 +1,220 @@
+import 'package:clinic/core/utils/app_colors.dart';
+import 'package:clinic/core/widgets/custom_button.dart';
+import 'package:flutter/material.dart';
+
+class ProfileView extends StatelessWidget {
+  const ProfileView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Dummy user data - in a real app, this would come from a user repository or auth service
+    final userData = {
+      'name': 'Ahmed Mohamed',
+      'email': 'ahmed.mohamed@example.com',
+      'phone': '+20 123 456 7890',
+      'dateOfBirth': '15/05/1985',
+      'address': 'Cairo, Egypt',
+    };
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My Profile'),
+        backgroundColor: AppColors.primaryColor,
+        foregroundColor: Colors.white,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Profile Header
+            Center(
+              child: Column(
+                children: [
+                  const CircleAvatar(
+                    radius: 50,
+                    backgroundColor: AppColors.primaryColor,
+                    child: Icon(
+                      Icons.person,
+                      size: 50,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    userData['name'] ?? '',
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    userData['email'] ?? '',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 32),
+
+            // Personal Information Section
+            const Text(
+              'Personal Information',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            _buildInfoItem(Icons.phone, 'Phone', userData['phone'] ?? ''),
+            _buildInfoItem(
+                Icons.cake, 'Date of Birth', userData['dateOfBirth'] ?? ''),
+            _buildInfoItem(
+                Icons.location_on, 'Address', userData['address'] ?? ''),
+            const SizedBox(height: 32),
+
+            // Settings Section
+            const Text(
+              'Settings',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            _buildSettingItem(
+              context,
+              Icons.edit,
+              'Edit Profile',
+              () {
+                // Navigate to edit profile screen
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('Edit Profile feature coming soon')),
+                );
+              },
+            ),
+            _buildSettingItem(
+              context,
+              Icons.history,
+              'Appointment History',
+              () {
+                // Navigate to appointment history screen
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('Appointment History feature coming soon')),
+                );
+              },
+            ),
+            _buildSettingItem(
+              context,
+              Icons.notifications,
+              'Notifications',
+              () {
+                // Navigate to notifications settings screen
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content:
+                          Text('Notifications settings feature coming soon')),
+                );
+              },
+            ),
+            _buildSettingItem(
+              context,
+              Icons.language,
+              'Language',
+              () {
+                // Navigate to language settings screen
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('Language settings feature coming soon')),
+                );
+              },
+            ),
+            _buildSettingItem(
+              context,
+              Icons.help,
+              'Help & Support',
+              () {
+                // Navigate to help & support screen
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('Help & Support feature coming soon')),
+                );
+              },
+            ),
+            const SizedBox(height: 32),
+
+            // Logout Button
+            CustomButton(
+              onPressed: () {
+                // Implement logout functionality
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Logging out...')),
+                );
+              },
+              text: 'Logout',
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInfoItem(IconData icon, String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          Icon(icon, color: AppColors.primaryColor),
+          const SizedBox(width: 16),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey[600],
+                ),
+              ),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSettingItem(
+      BuildContext context, IconData icon, String title, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        child: Row(
+          children: [
+            Icon(icon, color: AppColors.primaryColor),
+            const SizedBox(width: 16),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            const Spacer(),
+            const Icon(
+              Icons.arrow_forward_ios,
+              size: 16,
+              color: Colors.grey,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

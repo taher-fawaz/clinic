@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-import '../../../actionConfirm/presentation/view/actionConfirm_view.dart';
-import '../../../booking/presentation/views/booking_view.dart';
-import '../../../viewPosts/presentation/views/posts.dart';
-
+import 'package:clinic/core/utils/app_colors.dart';
+import 'package:clinic/features/home/presentation/views/home_view.dart';
+import 'package:clinic/features/appointment/presentation/views/appointment_view.dart';
+import 'package:clinic/features/profile/presentation/views/profile_view.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -29,9 +29,9 @@ class MainView extends StatelessWidget {
 
   List<Widget> _buildScreens() {
     return [
-      ActionConfirm(),
-      const BookingView(),
-      Posts(),
+      const HomeView(),
+      const AppointmentView(),
+      const ProfileView(),
     ];
   }
 
@@ -40,20 +40,20 @@ class MainView extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.home),
         title: "Home",
-        activeColorPrimary: Colors.blue,
-        inactiveColorPrimary: Colors.green,
+        activeColorPrimary: AppColors.primaryColor,
+        inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.calendar_today),
         title: "Appointment",
-        activeColorPrimary: Colors.blue,
-        inactiveColorPrimary: Colors.green,
+        activeColorPrimary: AppColors.primaryColor,
+        inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.person),
         title: "Profile",
-        activeColorPrimary: Colors.blue,
-        inactiveColorPrimary: Colors.green,
+        activeColorPrimary: AppColors.primaryColor,
+        inactiveColorPrimary: Colors.grey,
       ),
     ];
   }
