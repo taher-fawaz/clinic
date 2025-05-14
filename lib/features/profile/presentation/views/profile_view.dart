@@ -1,161 +1,183 @@
+import 'package:clinic/core/services/get_it_service.dart';
 import 'package:clinic/core/utils/app_colors.dart';
 import 'package:clinic/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../domain/entities/user_entity.dart';
+import '../bloc/profile_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Dummy user data - in a real app, this would come from a user repository or auth service
-    final userData = {
-      'name': 'Ahmed Mohamed',
-      'email': 'ahmed.mohamed@example.com',
-      'phone': '+20 123 456 7890',
-      'dateOfBirth': '15/05/1985',
-      'address': 'Cairo, Egypt',
-    };
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Profile'),
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: Colors.white,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Profile Header
-            Center(
+    final String? uid = FirebaseAuth.instance.currentUser?.uid;
+    return BlocProvider(
+      create: (context) => getIt<ProfileBloc>()..add(LoadUserProfile(uid!)),
+      child: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state) {
+          Widget? userSection;
+          if (state is ProfileLoading) {
+            userSection = const Center(child: CircularProgressIndicator());
+          } else if (state is ProfileLoaded) {
+            final UserEntity userData = state.user;
+            userSection = Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Profile Header
+                Center(
+                  child: Column(
+                    children: [
+                      const CircleAvatar(
+                        radius: 50,
+                        backgroundColor: AppColors.primaryColor,
+                        child: Icon(
+                          Icons.person,
+                          size: 50,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        userData.name,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        userData.email,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 32),
+                // Personal Information Section
+                const Text(
+                  'Personal Information',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                _buildInfoItem(Icons.phone, 'Phone', userData.phone),
+                _buildInfoItem(
+                    Icons.cake, 'Date of Birth', userData.dateOfBirth),
+                _buildInfoItem(Icons.location_on, 'Address', userData.address),
+                const SizedBox(height: 32),
+              ],
+            );
+          } else {
+            userSection = null;
+          }
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('My Profile'),
+              backgroundColor: AppColors.primaryColor,
+              foregroundColor: Colors.white,
+            ),
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.all(16.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CircleAvatar(
-                    radius: 50,
-                    backgroundColor: AppColors.primaryColor,
-                    child: Icon(
-                      Icons.person,
-                      size: 50,
-                      color: Colors.white,
+                  if (userSection != null) userSection,
+                  if (state is ProfileError)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 24.0),
+                      child: Center(
+                        child: Text(
+                          'Error: \${state.message}',
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      ),
                     ),
+                  // Settings Section
+                  const Text(
+                    'Settings',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
-                  Text(
-                    userData['name'] ?? '',
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  _buildSettingItem(
+                    context,
+                    Icons.edit,
+                    'Edit Profile',
+                    () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Edit Profile feature coming soon')),
+                      );
+                    },
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    userData['email'] ?? '',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
-                    ),
+                  _buildSettingItem(
+                    context,
+                    Icons.history,
+                    'Appointment History',
+                    () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text(
+                                'Appointment History feature coming soon')),
+                      );
+                    },
                   ),
+                  _buildSettingItem(
+                    context,
+                    Icons.notifications,
+                    'Notifications',
+                    () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text(
+                                'Notifications settings feature coming soon')),
+                      );
+                    },
+                  ),
+                  _buildSettingItem(
+                    context,
+                    Icons.language,
+                    'Language',
+                    () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content:
+                                Text('Language settings feature coming soon')),
+                      );
+                    },
+                  ),
+                  _buildSettingItem(
+                    context,
+                    Icons.help,
+                    'Help & Support',
+                    () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content:
+                                Text('Help & Support feature coming soon')),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 32),
+                  // Logout Button
+                  CustomButton(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Logging out...')),
+                      );
+                    },
+                    text: 'Logout',
+                  ),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),
-            const SizedBox(height: 32),
-
-            // Personal Information Section
-            const Text(
-              'Personal Information',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            _buildInfoItem(Icons.phone, 'Phone', userData['phone'] ?? ''),
-            _buildInfoItem(
-                Icons.cake, 'Date of Birth', userData['dateOfBirth'] ?? ''),
-            _buildInfoItem(
-                Icons.location_on, 'Address', userData['address'] ?? ''),
-            const SizedBox(height: 32),
-
-            // Settings Section
-            const Text(
-              'Settings',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            _buildSettingItem(
-              context,
-              Icons.edit,
-              'Edit Profile',
-              () {
-                // Navigate to edit profile screen
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text('Edit Profile feature coming soon')),
-                );
-              },
-            ),
-            _buildSettingItem(
-              context,
-              Icons.history,
-              'Appointment History',
-              () {
-                // Navigate to appointment history screen
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text('Appointment History feature coming soon')),
-                );
-              },
-            ),
-            _buildSettingItem(
-              context,
-              Icons.notifications,
-              'Notifications',
-              () {
-                // Navigate to notifications settings screen
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content:
-                          Text('Notifications settings feature coming soon')),
-                );
-              },
-            ),
-            _buildSettingItem(
-              context,
-              Icons.language,
-              'Language',
-              () {
-                // Navigate to language settings screen
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text('Language settings feature coming soon')),
-                );
-              },
-            ),
-            _buildSettingItem(
-              context,
-              Icons.help,
-              'Help & Support',
-              () {
-                // Navigate to help & support screen
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text('Help & Support feature coming soon')),
-                );
-              },
-            ),
-            const SizedBox(height: 32),
-
-            // Logout Button
-            CustomButton(
-              onPressed: () {
-                // Implement logout functionality
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Logging out...')),
-                );
-              },
-              text: 'Logout',
-            ),
-            const SizedBox(height: 16),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
