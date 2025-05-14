@@ -11,41 +11,12 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Dummy data for demonstration
-    final nextAppointment = AppointmentEntity(
-      id: '1',
-      patientId: 'patient1',
-      doctorId: 'doctor1',
-      appointmentDate: DateTime.now().add(const Duration(days: 2)),
-      status: 'scheduled',
-      notes: 'Regular checkup',
-    );
+    // TODO: Replace with actual data fetching logic
+    final List<AppointmentEntity> appointments = [];
+    final List<Map<String, dynamic>> articles = [];
+    final List<Map<String, dynamic>> offers = [];
 
-    final articles = [
-      {
-        'title': 'Maintaining Healthy Teeth',
-        'image': 'assets/images/article1.png',
-        'description': 'Tips for keeping your teeth healthy and strong.',
-      },
-      {
-        'title': 'Benefits of Regular Dental Checkups',
-        'image': 'assets/images/article2.png',
-        'description': 'Why you should visit your dentist regularly.',
-      },
-    ];
-
-    final offers = [
-      {
-        'title': '20% Off Teeth Whitening',
-        'image': 'assets/images/offer1.png',
-        'validUntil': DateTime.now().add(const Duration(days: 30)),
-      },
-      {
-        'title': 'Free Dental Checkup',
-        'image': 'assets/images/offer2.png',
-        'validUntil': DateTime.now().add(const Duration(days: 15)),
-      },
-    ];
+    AppointmentEntity? lastAppointment = appointments.isNotEmpty ? appointments.last : null;
 
     return Scaffold(
       appBar: AppBar(
@@ -67,11 +38,13 @@ class HomeView extends StatelessWidget {
             children: [
               // Next Appointment Section
               const Text(
-                'Your Next Appointment',
+                'Your Last Appointment',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
-              NextAppointmentCard(appointment: nextAppointment),
+              lastAppointment != null
+                  ? NextAppointmentCard(appointment: lastAppointment)
+                  : const Text('No appointments found.'),
 
               const SizedBox(height: 24),
 
@@ -81,20 +54,22 @@ class HomeView extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
-              SizedBox(
-                height: 200,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: articles.length,
-                  itemBuilder: (context, index) {
-                    return ArticleCard(
-                      title: articles[index]['title'] as String,
-                      imageUrl: articles[index]['image'] as String,
-                      description: articles[index]['description'] as String,
-                    );
-                  },
-                ),
-              ),
+              articles.isNotEmpty
+                  ? SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: articles.length,
+                        itemBuilder: (context, index) {
+                          return ArticleCard(
+                            title: articles[index]['title'] as String,
+                            imageUrl: articles[index]['image'] as String,
+                            description: articles[index]['description'] as String,
+                          );
+                        },
+                      ),
+                    )
+                  : const Text('No articles available.'),
 
               const SizedBox(height: 24),
 
@@ -104,20 +79,22 @@ class HomeView extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
-              SizedBox(
-                height: 180,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: offers.length,
-                  itemBuilder: (context, index) {
-                    return OfferCard(
-                      title: offers[index]['title'] as String,
-                      imageUrl: offers[index]['image'] as String,
-                      validUntil: offers[index]['validUntil'] as DateTime,
-                    );
-                  },
-                ),
-              ),
+              offers.isNotEmpty
+                  ? SizedBox(
+                      height: 180,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: offers.length,
+                        itemBuilder: (context, index) {
+                          return OfferCard(
+                            title: offers[index]['title'] as String,
+                            imageUrl: offers[index]['image'] as String,
+                            validUntil: offers[index]['validUntil'] as DateTime,
+                          );
+                        },
+                      ),
+                    )
+                  : const Text('No offers available.'),
             ],
           ),
         ),
