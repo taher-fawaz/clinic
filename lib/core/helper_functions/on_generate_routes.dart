@@ -1,4 +1,6 @@
 import 'package:clinic/core/services/get_it_service.dart';
+import 'package:clinic/features/auth/domain/repos/auth_repo.dart';
+import 'package:clinic/features/auth/presentation/cubits/signin_cubit/signin_cubit.dart';
 import 'package:clinic/features/auth/presentation/views/signin_view.dart';
 import 'package:clinic/features/auth/presentation/views/signup_view.dart';
 import 'package:clinic/features/main_view/presentation/pages/main_view.dart';
@@ -22,8 +24,13 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const SignupView());
     case MainView.routeName:
       return MaterialPageRoute(
-          builder: (context) => BlocProvider<AppointmentBloc>(
-                create: (context) => AppointmentBloc(appointmentRepo: getIt()),
+          builder: (context) => MultiBlocProvider(
+                providers: [
+                  BlocProvider<AppointmentBloc>(
+                    create: (context) =>
+                        AppointmentBloc(appointmentRepo: getIt()),
+                  ),
+                ],
                 child: const MainView(),
               ));
 

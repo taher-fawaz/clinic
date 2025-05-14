@@ -18,4 +18,5 @@ abstract class AuthRepo {
   Future saveUserData({required UserEntity user});
   Future<UserEntity> getUserData({required String uid});
   Future<Either<Failure, UserEntity>> signinWithApple();
+  Future<void> logout();
 }

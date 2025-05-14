@@ -48,4 +48,10 @@ class SigninCubit extends Cubit<SigninState> {
       (userEntity) => emit(SigninSuccess(userEntity: userEntity)),
     );
   }
+
+  Future<void> logout() async {
+    emit(SigninLoading());
+    await authRepo.logout();
+    emit(SigninInitial());
+  }
 }

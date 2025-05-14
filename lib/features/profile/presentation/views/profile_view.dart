@@ -1,6 +1,8 @@
 import 'package:clinic/core/services/get_it_service.dart';
 import 'package:clinic/core/utils/app_colors.dart';
 import 'package:clinic/core/widgets/custom_button.dart';
+import 'package:clinic/features/auth/presentation/cubits/signin_cubit/signin_cubit.dart';
+import 'package:clinic/features/auth/presentation/views/signin_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -164,13 +166,26 @@ class ProfileView extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
                   // Logout Button
-                  CustomButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Logging out...')),
-                      );
-                    },
-                    text: 'Logout',
+                  Center(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primaryColor,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 32, vertical: 12),
+                      ),
+                      onPressed: () async {
+                        // Find the SigninCubit and call logout
+                        final signinCubit = BlocProvider.of<SigninCubit>(
+                            context,
+                            listen: false);
+                        await signinCubit.logout();
+                        // Navigate to login or splash screen after logout
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            SigninView.routeName, (route) => false);
+                      },
+                      child: const Text('Logout'),
+                    ),
                   ),
                   const SizedBox(height: 16),
                 ],
