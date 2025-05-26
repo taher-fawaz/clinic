@@ -5,6 +5,7 @@ import 'package:clinic/features/appointment/domain/entities/appointment_entity.d
 import 'package:clinic/features/appointment/domain/entities/doctor_entity.dart';
 import 'package:clinic/features/appointment/presentation/bloc/appointment_bloc.dart';
 import 'package:clinic/features/appointment/presentation/widgets/appointment_list.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -139,13 +140,14 @@ class _AppointmentViewState extends State<AppointmentView> {
         _selectedTime.hour,
         _selectedTime.minute,
       );
+      final currentUserID =
+          FirebaseAuth.instance.currentUser?.uid ?? 'unknown_user_id';
 
       final appointment = AppointmentEntity(
         id: DateTime.now()
             .millisecondsSinceEpoch
             .toString(), // Generate a temporary ID
-        patientId:
-            'current_user_id', // In a real app, get this from auth service
+        patientId: currentUserID, // In a real app, get this from auth service
         doctorId: _selectedDoctor!.id,
         appointmentDate: appointmentDate,
         status: 'scheduled',

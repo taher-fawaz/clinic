@@ -34,7 +34,7 @@ class ArticleCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-            child: Image.asset(
+            child: Image.network(
               imageUrl,
               height: 120,
               width: double.infinity,
