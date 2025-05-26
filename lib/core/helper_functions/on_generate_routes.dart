@@ -35,6 +35,16 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
               ));
 
     default:
-      return MaterialPageRoute(builder: (context) => const Scaffold());
+      return MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(title: const Text('Unknown Route')),
+          body: Center(
+            child: Text(
+              'No route defined for: \\${settings.name}',
+              style: const TextStyle(fontSize: 18, color: Colors.red),
+            ),
+          ),
+        ),
+      );
   }
 }

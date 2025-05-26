@@ -196,8 +196,9 @@ class ProfileView extends StatelessWidget {
                             listen: false);
                         await signinCubit.logout();
                         // Navigate to login or splash screen after logout
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            SigninView.routeName, (route) => false);
+                        Navigator.of(context, rootNavigator: true)
+                            .pushNamedAndRemoveUntil(
+                                SigninView.routeName, (route) => false);
                       },
                       child: const Text('Logout'),
                     ),
