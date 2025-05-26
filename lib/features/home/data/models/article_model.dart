@@ -37,4 +37,27 @@ class ArticleModel extends ArticleEntity {
       'publishDate': Timestamp.fromDate(publishDate),
     };
   }
+
+  // Firebase specific methods
+  factory ArticleModel.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return ArticleModel.fromJson({
+      ...data,
+      'id': doc.id,
+    });
+  }
+
+  Map<String, dynamic> toFirestore() {
+    return toJson();
+  }
+
+  factory ArticleModel.fromEntity(ArticleEntity entity) {
+    return ArticleModel(
+      id: entity.id,
+      title: entity.title,
+      imageUrl: entity.imageUrl,
+      description: entity.description,
+      publishDate: entity.publishDate,
+    );
+  }
 }

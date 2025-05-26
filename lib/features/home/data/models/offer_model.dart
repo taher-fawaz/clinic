@@ -41,4 +41,28 @@ class OfferModel extends OfferEntity {
       'discountPercentage': discountPercentage,
     };
   }
+
+  // Firebase specific methods
+  factory OfferModel.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return OfferModel.fromJson({
+      ...data,
+      'id': doc.id,
+    });
+  }
+
+  Map<String, dynamic> toFirestore() {
+    return toJson();
+  }
+
+  factory OfferModel.fromEntity(OfferEntity entity) {
+    return OfferModel(
+      id: entity.id,
+      title: entity.title,
+      imageUrl: entity.imageUrl,
+      validUntil: entity.validUntil,
+      description: entity.description,
+      discountPercentage: entity.discountPercentage,
+    );
+  }
 }

@@ -2,13 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:clinic/features/auth/domain/entites/user_entity.dart';
 
 class UserModel extends UserEntity {
-  UserModel({required super.name, required super.email, required super.uId});
+  UserModel({
+    required super.name,
+    required super.email,
+    required super.uId,
+    super.isAdmin = false,
+  });
 
   factory UserModel.fromFirebaseUser(User user) {
     return UserModel(
       name: user.displayName ?? '',
       email: user.email ?? '',
       uId: user.uid,
+      isAdmin: false, // Default to false, can be updated later
     );
   }
 
@@ -17,6 +23,7 @@ class UserModel extends UserEntity {
       name: json['name'],
       email: json['email'],
       uId: json['uId'],
+      isAdmin: json['isAdmin'] ?? false,
     );
   }
 
@@ -25,6 +32,7 @@ class UserModel extends UserEntity {
       name: user.name,
       email: user.email,
       uId: user.uId,
+      isAdmin: user.isAdmin,
     );
   }
 
@@ -33,6 +41,7 @@ class UserModel extends UserEntity {
       'name': name,
       'email': email,
       'uId': uId,
+      'isAdmin': isAdmin,
     };
   }
 }

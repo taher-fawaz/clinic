@@ -1,8 +1,10 @@
 import 'package:clinic/core/services/get_it_service.dart';
+import 'package:flutter/material.dart';
 import 'package:clinic/core/utils/app_colors.dart';
 import 'package:clinic/core/widgets/custom_button.dart';
 import 'package:clinic/features/auth/presentation/cubits/signin_cubit/signin_cubit.dart';
 import 'package:clinic/features/auth/presentation/views/signin_view.dart';
+import 'package:clinic/features/admin/presentation/views/admin_setup_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -161,6 +163,19 @@ class ProfileView extends StatelessWidget {
                         const SnackBar(
                             content:
                                 Text('Help & Support feature coming soon')),
+                      );
+                    },
+                  ),
+                  _buildSettingItem(
+                    context,
+                    Icons.admin_panel_settings,
+                    'Admin Setup (Dev)',
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AdminSetupView(),
+                        ),
                       );
                     },
                   ),
