@@ -3,7 +3,7 @@ class UserEntity {
   final String name;
   final String email;
   final String phone;
-  final String dateOfBirth;
+  final DateTime dateOfBirth;
   final String address;
 
   const UserEntity({

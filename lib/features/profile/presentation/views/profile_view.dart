@@ -70,8 +70,8 @@ class ProfileView extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 _buildInfoItem(Icons.phone, 'Phone', userData.phone),
-                _buildInfoItem(
-                    Icons.cake, 'Date of Birth', userData.dateOfBirth),
+                _buildInfoItem(Icons.cake, 'Date of Birth',
+                    userData.dateOfBirth.toLocal().toString().split(' ')[0]),
                 _buildInfoItem(Icons.location_on, 'Address', userData.address),
                 const SizedBox(height: 32),
               ],

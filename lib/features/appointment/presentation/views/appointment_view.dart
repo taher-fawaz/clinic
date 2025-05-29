@@ -150,7 +150,7 @@ class _AppointmentViewState extends State<AppointmentView> {
         patientId: currentUserID, // In a real app, get this from auth service
         doctorId: _selectedDoctor!.id,
         appointmentDate: appointmentDate,
-        status: 'scheduled',
+        status: 'pending',
         notes: _notesController.text,
       );
 

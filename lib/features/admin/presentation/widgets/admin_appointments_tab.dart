@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clinic/core/utils/app_colors.dart';
+import 'package:clinic/core/services/get_it_service.dart';
 import 'package:clinic/features/appointment/domain/entities/appointment_entity.dart';
+import 'package:clinic/features/admin/presentation/cubits/admin_appointments_cubit.dart';
 
 class AdminAppointmentsTab extends StatefulWidget {
   const AdminAppointmentsTab({Key? key}) : super(key: key);
@@ -10,64 +13,96 @@ class AdminAppointmentsTab extends StatefulWidget {
 }
 
 class _AdminAppointmentsTabState extends State<AdminAppointmentsTab> {
-  List<AppointmentEntity> pendingAppointments = [
-    // Sample data - in real app this would come from a repository
-    AppointmentEntity(
-      id: '1',
-      patientId: 'patient1',
-      doctorId: 'doctor1',
-      appointmentDate: DateTime.now().add(const Duration(days: 1)),
-      status: 'pending',
-      notes: 'Regular checkup',
-    ),
-    AppointmentEntity(
-      id: '2',
-      patientId: 'patient2',
-      doctorId: 'doctor2',
-      appointmentDate: DateTime.now().add(const Duration(days: 2)),
-      status: 'pending',
-      notes: 'Tooth pain consultation',
-    ),
-  ];
+  late AdminAppointmentsCubit _appointmentsCubit;
 
-  List<AppointmentEntity> processedAppointments = [];
+  @override
+  void initState() {
+    super.initState();
+    _appointmentsCubit = getIt<AdminAppointmentsCubit>();
+    _appointmentsCubit.loadAppointments();
+  }
+
+  @override
+  void dispose() {
+    _appointmentsCubit.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 0,
-          bottom: const TabBar(
-            labelColor: AppColors.primaryColor,
-            unselectedLabelColor: Colors.grey,
-            indicatorColor: AppColors.primaryColor,
-            tabs: [
-              Tab(
-                icon: Icon(Icons.pending_actions),
-                text: 'Pending Approval',
-              ),
-              Tab(
-                icon: Icon(Icons.history),
-                text: 'Processed',
-              ),
-            ],
+    return BlocProvider(
+      create: (context) => _appointmentsCubit,
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            toolbarHeight: 0,
+            bottom: const TabBar(
+              labelColor: AppColors.primaryColor,
+              unselectedLabelColor: Colors.grey,
+              indicatorColor: AppColors.primaryColor,
+              tabs: [
+                Tab(
+                  icon: Icon(Icons.pending_actions),
+                  text: 'Pending Approval',
+                ),
+                Tab(
+                  icon: Icon(Icons.history),
+                  text: 'Processed',
+                ),
+              ],
+            ),
           ),
-        ),
-        body: TabBarView(
-          children: [
-            _buildPendingAppointments(),
-            _buildProcessedAppointments(),
-          ],
+          body: BlocConsumer<AdminAppointmentsCubit, AdminAppointmentsState>(
+            listener: (context, state) {
+              if (state is AdminAppointmentsOperationSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              } else if (state is AdminAppointmentsError) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              if (state is AdminAppointmentsInitial ||
+                  state is AdminAppointmentsLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is AdminAppointmentsLoaded) {
+                return TabBarView(
+                  children: [
+                    _buildPendingAppointments(state.pendingAppointments),
+                    _buildProcessedAppointments(state.processedAppointments),
+                  ],
+                );
+              } else if (state is AdminAppointmentsError) {
+                return Center(child: Text('Error: ${state.message}'));
+              } else {
+                return TabBarView(
+                  children: [
+                    _buildPendingAppointments([]),
+                    _buildProcessedAppointments([]),
+                  ],
+                );
+              }
+            },
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildPendingAppointments() {
+  Widget _buildPendingAppointments(
+      List<AppointmentEntity> pendingAppointments) {
     return Column(
       children: [
         Padding(
@@ -215,8 +250,8 @@ class _AdminAppointmentsTabState extends State<AdminAppointmentsTab> {
                               children: [
                                 Expanded(
                                   child: ElevatedButton.icon(
-                                    onPressed: () =>
-                                        _approveAppointment(appointment, index),
+                                    onPressed: () => _approveAppointment(
+                                        context, appointment),
                                     icon: const Icon(Icons.check),
                                     label: const Text('Approve'),
                                     style: ElevatedButton.styleFrom(
@@ -228,8 +263,8 @@ class _AdminAppointmentsTabState extends State<AdminAppointmentsTab> {
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: ElevatedButton.icon(
-                                    onPressed: () =>
-                                        _rejectAppointment(appointment, index),
+                                    onPressed: () => _rejectAppointment(
+                                        context, appointment),
                                     icon: const Icon(Icons.close),
                                     label: const Text('Reject'),
                                     style: ElevatedButton.styleFrom(
@@ -251,7 +286,8 @@ class _AdminAppointmentsTabState extends State<AdminAppointmentsTab> {
     );
   }
 
-  Widget _buildProcessedAppointments() {
+  Widget _buildProcessedAppointments(
+      List<AppointmentEntity> processedAppointments) {
     return Column(
       children: [
         Padding(
@@ -339,39 +375,25 @@ class _AdminAppointmentsTabState extends State<AdminAppointmentsTab> {
     return '${dateTime.day}/${dateTime.month}/${dateTime.year} at ${dateTime.hour}:${dateTime.minute.toString().padLeft(2, '0')}';
   }
 
-  void _approveAppointment(AppointmentEntity appointment, int index) {
+  void _approveAppointment(
+      BuildContext context, AppointmentEntity appointment) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: const Text('Approve Appointment'),
         content:
             const Text('Are you sure you want to approve this appointment?'),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () {
-              setState(() {
-                final approvedAppointment = AppointmentEntity(
-                  id: appointment.id,
-                  patientId: appointment.patientId,
-                  doctorId: appointment.doctorId,
-                  appointmentDate: appointment.appointmentDate,
-                  status: 'approved',
-                  notes: appointment.notes,
-                );
-                pendingAppointments.removeAt(index);
-                processedAppointments.insert(0, approvedAppointment);
-              });
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Appointment approved successfully'),
-                  backgroundColor: Colors.green,
-                ),
-              );
+              context
+                  .read<AdminAppointmentsCubit>()
+                  .approveAppointment(appointment.id);
+              Navigator.pop(dialogContext);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green,
@@ -384,39 +406,24 @@ class _AdminAppointmentsTabState extends State<AdminAppointmentsTab> {
     );
   }
 
-  void _rejectAppointment(AppointmentEntity appointment, int index) {
+  void _rejectAppointment(BuildContext context, AppointmentEntity appointment) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: const Text('Reject Appointment'),
         content:
             const Text('Are you sure you want to reject this appointment?'),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () {
-              setState(() {
-                final rejectedAppointment = AppointmentEntity(
-                  id: appointment.id,
-                  patientId: appointment.patientId,
-                  doctorId: appointment.doctorId,
-                  appointmentDate: appointment.appointmentDate,
-                  status: 'rejected',
-                  notes: appointment.notes,
-                );
-                pendingAppointments.removeAt(index);
-                processedAppointments.insert(0, rejectedAppointment);
-              });
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Appointment rejected'),
-                  backgroundColor: Colors.red,
-                ),
-              );
+              context
+                  .read<AdminAppointmentsCubit>()
+                  .rejectAppointment(appointment.id);
+              Navigator.pop(dialogContext);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
@@ -16,7 +18,9 @@ class UserModel extends UserEntity {
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       phone: map['phone'] ?? '',
-      dateOfBirth: map['dateOfBirth'] ?? '',
+      dateOfBirth: map['dateOfBirth'] != null
+          ? (map['dateOfBirth'] as Timestamp).toDate()
+          : DateTime.now(),
       address: map['address'] ?? '',
     );
   }
@@ -27,7 +31,7 @@ class UserModel extends UserEntity {
       'name': name,
       'email': email,
       'phone': phone,
-      'dateOfBirth': dateOfBirth,
+      'dateOfBirth': Timestamp.fromDate(dateOfBirth),
       'address': address,
     };
   }
