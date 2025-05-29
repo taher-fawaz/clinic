@@ -6,6 +6,7 @@ import 'package:clinic/features/appointment/domain/repos/appointment_repo.dart';
 import 'package:clinic/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:clinic/features/auth/domain/repos/auth_repo.dart';
 import 'package:clinic/features/admin/di/admin_dependency.dart';
+import 'package:clinic/features/appointment/di/appointment_dependency.dart';
 import 'package:clinic/features/home/di/home_dependency.dart';
 import 'package:clinic/features/profile/di/profile_dependency.dart';
 import 'package:get_it/get_it.dart';
@@ -44,4 +45,5 @@ void setupGetit() {
   setupProfileDependencies();
   setupHomeDependencies();
   setupAdminDependencies();
+  setupAppointmentDependencies();
 }

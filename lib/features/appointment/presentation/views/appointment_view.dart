@@ -4,6 +4,7 @@ import 'package:clinic/core/widgets/custom_text_field.dart';
 import 'package:clinic/features/appointment/domain/entities/appointment_entity.dart';
 import 'package:clinic/features/appointment/domain/entities/doctor_entity.dart';
 import 'package:clinic/features/appointment/presentation/bloc/appointment_bloc.dart';
+import 'package:clinic/features/appointment/presentation/views/book_appointment_view.dart';
 import 'package:clinic/features/appointment/presentation/widgets/appointment_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -251,6 +252,19 @@ class _AppointmentViewState extends State<AppointmentView> {
             ),
 
             // Book New Appointment Tab
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Center(
+                child: CustomButton(
+                  text: 'Find Available Slots',
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true)
+                        .pushNamed(BookAppointmentView.routeName);
+                  },
+                ),
+              ),
+            ),
+            /* Replace the original form with a button to navigate
             BlocListener<AppointmentBloc, AppointmentState>(
               listener: (context, state) {
                 if (state is AppointmentCreated) {
@@ -378,7 +392,7 @@ class _AppointmentViewState extends State<AppointmentView> {
                   ),
                 ),
               ),
-            ),
+            ),*/
           ],
         ),
       ),

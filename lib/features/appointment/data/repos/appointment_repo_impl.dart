@@ -44,6 +44,8 @@ class AppointmentRepoImpl implements AppointmentRepo {
       final appointmentModel = AppointmentModel(
         id: FirebaseFirestore.instance.collection('appointments').doc().id,
         patientId: appointment.patientId,
+        patientName: appointment.patientName, // Added patientName
+        patientPhone: appointment.patientPhone, // Added patientPhone
         doctorId: appointment.doctorId,
         appointmentDate: appointment.appointmentDate,
         status: appointment.status,
@@ -70,6 +72,8 @@ class AppointmentRepoImpl implements AppointmentRepo {
       final appointmentModel = AppointmentModel(
         id: appointment.id,
         patientId: appointment.patientId,
+        patientName: appointment.patientName, // Added patientName
+        patientPhone: appointment.patientPhone, // Added patientPhone
         doctorId: appointment.doctorId,
         appointmentDate: appointment.appointmentDate,
         status: appointment.status,
@@ -108,6 +112,8 @@ class AppointmentRepoImpl implements AppointmentRepo {
       final updatedAppointment = AppointmentModel(
         id: appointment.id,
         patientId: appointment.patientId,
+        patientName: appointment.patientName, // Added patientName
+        patientPhone: appointment.patientPhone, // Added patientPhone
         doctorId: appointment.doctorId,
         appointmentDate: appointment.appointmentDate,
         status: 'cancelled',

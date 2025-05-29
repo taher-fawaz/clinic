@@ -2,9 +2,11 @@ import 'package:clinic/core/services/get_it_service.dart';
 import 'package:clinic/features/admin/data/repositories/firebase_appointment_repository.dart';
 import 'package:clinic/features/admin/data/repositories/firebase_article_repository.dart';
 import 'package:clinic/features/admin/data/repositories/firebase_offer_repository.dart';
+import 'package:clinic/features/admin/data/repositories/firebase_availability_repository.dart';
 import 'package:clinic/features/admin/presentation/cubits/admin_appointments_cubit.dart';
 import 'package:clinic/features/admin/presentation/cubits/admin_articles_cubit.dart';
 import 'package:clinic/features/admin/presentation/cubits/admin_offers_cubit.dart';
+import 'package:clinic/features/admin/presentation/cubits/admin_availability_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -29,6 +31,12 @@ void setupAdminDependencies() {
     );
   }
 
+  if (!getIt.isRegistered<FirebaseAvailabilityRepository>()) {
+    getIt.registerSingleton<FirebaseAvailabilityRepository>(
+      FirebaseAvailabilityRepository(),
+    );
+  }
+
   // Cubits
   if (!getIt.isRegistered<AdminAppointmentsCubit>()) {
     getIt.registerFactory<AdminAppointmentsCubit>(
@@ -50,6 +58,14 @@ void setupAdminDependencies() {
     getIt.registerFactory<AdminOffersCubit>(
       () => AdminOffersCubit(
         getIt<FirebaseOfferRepository>(),
+      ),
+    );
+  }
+
+  if (!getIt.isRegistered<AdminAvailabilityCubit>()) {
+    getIt.registerFactory<AdminAvailabilityCubit>(
+      () => AdminAvailabilityCubit(
+        getIt<FirebaseAvailabilityRepository>(),
       ),
     );
   }

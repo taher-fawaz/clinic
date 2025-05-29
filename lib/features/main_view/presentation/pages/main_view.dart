@@ -7,6 +7,11 @@ import 'package:clinic/features/profile/presentation/views/profile_view.dart';
 import 'package:clinic/features/admin/presentation/views/admin_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:clinic/features/appointment/presentation/bloc/appointment_bloc.dart';
+import 'package:clinic/core/services/get_it_service.dart';
+import 'package:clinic/features/auth/domain/repos/auth_repo.dart';
+import 'package:clinic/features/appointment/domain/repos/appointment_repo.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -89,7 +94,13 @@ class _MainViewState extends State<MainView> {
   List<Widget> _buildScreens() {
     List<Widget> screens = [
       const HomeView(),
-      const AppointmentView(),
+      BlocProvider<AppointmentBloc>(
+        create: (context) =>
+            AppointmentBloc(appointmentRepo: getIt<AppointmentRepo>())
+              ..add(LoadAppointments(
+                  patientId: FirebaseAuth.instance.currentUser?.uid ?? '')),
+        child: const AppointmentView(),
+      ),
       const ProfileView(),
     ];
 

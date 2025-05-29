@@ -18,7 +18,7 @@ class OnBoardingPageview extends StatelessWidget {
           isVisible: true,
           image: Assets.imagesBoarding3,
           subtitle:
-              'اكتشف تجربة تسوق فريدة مع FruitHUB. استكشف مجموعتنا الواسعة من الفواكه الطازجة الممتازة واحصل على أفضل العروض والجودة العالية.',
+              'نحن هنا لتقديم أفضل الخدمات الطبية لك ولعائلتك. استمتع بتجربة طبية مريحة وسهلة مع Ora Clinic',
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -45,9 +45,9 @@ class OnBoardingPageview extends StatelessWidget {
           isVisible: false,
           image: Assets.imagesBoarding2,
           subtitle:
-              'نقدم لك أفضل الفواكه المختارة بعناية. اطلع على التفاصيل والصور والتقييمات لتتأكد من اختيار الفاكهة المثالية',
+              'استمتع بتجربة طبية مريحة وسهلة مع Ora Clinic. نحن هنا لتقديم أفضل الخدمات الطبية لك ولعائلتك.',
           title: Text(
-            'ابحث وتسوق',
+            'خدمات طبية مريحة وسهلة',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Color(0xFF0C0D0D),

@@ -3,6 +3,7 @@ import 'package:clinic/core/utils/app_colors.dart';
 import '../widgets/admin_articles_tab.dart';
 import '../widgets/admin_offers_tab.dart';
 import '../widgets/admin_appointments_tab.dart';
+import '../widgets/admin_availability_tab.dart';
 
 class AdminView extends StatelessWidget {
   const AdminView({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class AdminView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Admin Panel'),
@@ -33,6 +34,10 @@ class AdminView extends StatelessWidget {
                 icon: Icon(Icons.calendar_today),
                 text: 'Appointments',
               ),
+              Tab(
+                icon: Icon(Icons.schedule),
+                text: 'Availability',
+              ),
             ],
           ),
         ),
@@ -41,6 +46,7 @@ class AdminView extends StatelessWidget {
             AdminArticlesTab(),
             AdminOffersTab(),
             AdminAppointmentsTab(),
+            AdminAvailabilityTab(),
           ],
         ),
       ),
