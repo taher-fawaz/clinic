@@ -1,51 +1,42 @@
-import 'package:clinic/core/helper_functions/on_generate_routes.dart';
-import 'package:clinic/core/services/custom_bloc_observer.dart';
-import 'package:clinic/core/services/get_it_service.dart';
-import 'package:clinic/core/services/shared_preferences_singleton.dart';
-import 'package:clinic/core/utils/app_colors.dart';
+import "package:easy_localization/easy_localization.dart";
+import "package:firebase_core/firebase_core.dart";
+import "package:flutter/material.dart";
+import "package:hive_flutter/hive_flutter.dart";
+import "package:hydrated_bloc/hydrated_bloc.dart";
+import "package:path_provider/path_provider.dart";
 
-import 'package:clinic/features/splash/presentation/views/splash_view.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/date_symbol_data_local.dart';
+import "src/app.dart";
+import "src/configs/adapter/adapter_conf.dart";
+import "src/configs/injector/injector_conf.dart";
+import "src/core/constants/list_translation_locale.dart";
+import "src/core/utils/observer.dart";
 
+//Test
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
-  initializeDateFormatting('ar', '').then((value) => null);
-  initializeDateFormatting('en', '').then((value) => null);
-  await Firebase.initializeApp();
-  setupGetit();
-  WidgetsFlutterBinding.ensureInitialized();
+  await Future.wait([
+    Hive.initFlutter(),
+    getTemporaryDirectory().then((path) async {
+      HydratedBloc.storage = await HydratedStorage.build(
+        storageDirectory: HydratedStorageDirectory(path.path),
+      );
+    }),
+  ]);
 
-  Bloc.observer = CustomBlocObserver();
+  configureAdapter();
 
-  await Prefs.init();
+  configureDepedencies();
 
-  setupGetit();
-  runApp(const MyApp());
-}
+  Bloc.observer = AppBlocObserver();
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        fontFamily: 'Cairo',
-        scaffoldBackgroundColor: Colors.white,
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.primaryColor,
-        ),
-      ),
-      onGenerateRoute: onGenerateRoute,
-      initialRoute: SplashView.routeName,
-      debugShowCheckedModeBanner: false,
-    );
-  }
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [indonesiaLocale, englishLocale],
+      path: "assets/translations",
+      startLocale: indonesiaLocale,
+      child: const MyApp(),
+    ),
+  );
 }
