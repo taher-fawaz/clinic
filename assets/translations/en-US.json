@@ -57,5 +57,33 @@
         "agreeToTerms": "Please agree to the terms and conditions"
       }
     }
+  },
+  "home": {
+    "title": "Home",
+    "welcome": "Welcome back",
+    "doctorWork": {
+      "title": "Doctor's Work",
+      "before": "Before",
+      "after": "After",
+      "viewAll": "View All",
+      "by": "by"
+    },
+    "articles": {
+      "title": "Latest Articles",
+      "readMore": "Read More",
+      "minRead": "min read",
+      "viewAll": "View All Articles"
+    },
+    "appointment": {
+      "bookNow": "Book Appointment",
+      "title": "Ready to get started?",
+      "subtitle": "Book an appointment with our expert doctors"
+    },
+    "bottomNav": {
+      "home": "Home",
+      "appointments": "Appointments",
+      "articles": "Articles",
+      "profile": "Profile"
+    }
   }
 }

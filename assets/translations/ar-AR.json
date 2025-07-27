@@ -57,5 +57,33 @@
         "agreeToTerms": "يرجى الموافقة على الشروط والأحكام"
       }
     }
+  },
+  "home": {
+    "title": "الرئيسية",
+    "welcome": "مرحباً بعودتك",
+    "doctorWork": {
+      "title": "أعمال الطبيب",
+      "before": "قبل",
+      "after": "بعد",
+      "viewAll": "عرض الكل",
+      "by": "بواسطة"
+    },
+    "articles": {
+      "title": "أحدث المقالات",
+      "readMore": "اقرأ المزيد",
+      "minRead": "دقيقة قراءة",
+      "viewAll": "عرض جميع المقالات"
+    },
+    "appointment": {
+      "bookNow": "احجز موعد",
+      "title": "مستعد للبدء؟",
+      "subtitle": "احجز موعداً مع أطبائنا المتخصصين"
+    },
+    "bottomNav": {
+      "home": "الرئيسية",
+      "appointments": "المواعيد",
+      "articles": "المقالات",
+      "profile": "الملف الشخصي"
+    }
   }
 }

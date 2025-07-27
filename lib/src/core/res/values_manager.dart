@@ -1,3 +1,5 @@
+part of app_res;
+
 abstract class AppMargin {
   static const double m01 = .10;
   static const double m02 = .20;

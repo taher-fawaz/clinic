@@ -1,6 +1,4 @@
 import 'package:clinic/src/core/res/app_res.dart';
-import 'package:clinic/src/core/res/font_manager.dart';
-import 'package:clinic/src/core/res/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

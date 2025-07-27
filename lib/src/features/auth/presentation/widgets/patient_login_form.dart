@@ -1,6 +1,8 @@
+import 'package:clinic/src/routes/app_route_path.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/extensions/integer_sizedbox_extension.dart';
 
 class PatientLoginForm extends StatefulWidget {
@@ -23,7 +25,7 @@ class _PatientLoginFormState extends State<PatientLoginForm> {
     super.dispose();
   }
 
-  void _handleLogin() {
+  void _handleLogin(BuildContext context) {
     // Simple UI feedback without business logic
     setState(() {
       _isLoading = true;
@@ -45,6 +47,14 @@ class _PatientLoginFormState extends State<PatientLoginForm> {
         );
       }
     });
+    context.goNamed(
+      AppRoute.home.name,
+      pathParameters: {
+        'user_id': 'dummy_user_123',
+        'email': 'patient@example.com',
+        'username': 'DummyPatient',
+      },
+    );
   }
 
   @override
@@ -134,7 +144,7 @@ class _PatientLoginFormState extends State<PatientLoginForm> {
           width: double.infinity,
           height: 50.h,
           child: ElevatedButton(
-            onPressed: _isLoading ? null : _handleLogin,
+            onPressed: _isLoading ? null : () => _handleLogin(context),
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).primaryColor,
               shape: RoundedRectangleBorder(

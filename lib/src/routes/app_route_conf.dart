@@ -31,21 +31,21 @@ class AppRouteConf {
         name: AppRoute.register.name,
         builder: (_, __) => const PatientRegisterPage(),
       ),
-      // GoRoute(
-      //   path: AppRoute.home.path,
-      //   name: AppRoute.home.name,
-      //   builder: (_, state) {
-      //     final params = state.pathParameters;
+      GoRoute(
+        path: AppRoute.home.path,
+        name: AppRoute.home.name,
+        builder: (_, state) {
+          final params = state.pathParameters;
 
-      //     final user = UserEntity(
-      //       username: params["username"],
-      //       email: params["email"],
-      //       userId: params["user_id"],
-      //     );
+          final user = UserEntity(
+            username: params["username"],
+            email: params["email"],
+            userId: params["user_id"],
+          );
 
-      //     return HomePage(user: user);
-      //   },
-      // ),
+          return const PatientHomeScreen();
+        },
+      ),
     ],
   );
 }

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+part of app_res;
 
 abstract class FontWeightManager {
   static const FontWeight thin = FontWeight.w100;
@@ -32,14 +31,14 @@ abstract class FontSize {
 }
 
 abstract class FontFamilyManager {
-  // Best Google Fonts for English - Inter is modern, readable, and optimized for UI
-  static String get englishFont => GoogleFonts.inter().fontFamily!;
+  // System fonts for English - using built-in fonts to avoid network issues
+  static String get englishFont => 'Roboto';
 
-  // Best Google Fonts for Arabic - Noto Sans Arabic provides excellent Arabic support
-  static String get arabicFont => GoogleFonts.notoSansArabic().fontFamily!;
+  // System fonts for Arabic - using built-in Arabic support
+  static String get arabicFont => 'Noto Sans Arabic';
 
-  // Fallback font - Poppins (current default)
-  static String get fallbackFont => GoogleFonts.poppins().fontFamily!;
+  // Fallback font - system default
+  static String get fallbackFont => 'Roboto';
 
   // Get appropriate font based on locale
   static String getFontForLocale(Locale locale) {

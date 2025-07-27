@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
-
-import 'font_manager.dart';
+part of app_res;
 
 abstract class TextStyleManager {
   static TextStyle _getTextStyle(double fontSize, FontWeight fontWeight,
-      {Color? color, double? letterSpacing, double? height, String? fontFamily}) {
+      {Color? color,
+      double? letterSpacing,
+      double? height,
+      String? fontFamily}) {
     return TextStyle(
         overflow: TextOverflow.ellipsis,
         fontSize: fontSize,
@@ -16,7 +17,8 @@ abstract class TextStyleManager {
   }
 
   // Locale-aware text style methods
-  static TextStyle _getLocalizedTextStyle(double fontSize, FontWeight fontWeight,
+  static TextStyle _getLocalizedTextStyle(
+      double fontSize, FontWeight fontWeight,
       {Color? color, double? letterSpacing, double? height, Locale? locale}) {
     return _getTextStyle(
       fontSize,
@@ -31,17 +33,25 @@ abstract class TextStyleManager {
 // Regular style methods (with optional locale support)
 
   static TextStyle getRegularStyle(
-      {double fontSize = FontSize.s14, Color color = Colors.black, Locale? locale}) {
-    return locale != null 
-        ? _getLocalizedTextStyle(fontSize, FontWeightManager.regular, color: color, locale: locale)
-        : _getTextStyle(fontSize, FontWeightManager.regular, color: color, fontFamily: FontFamilyManager.englishFont);
+      {double fontSize = FontSize.s14,
+      Color color = Colors.black,
+      Locale? locale}) {
+    return locale != null
+        ? _getLocalizedTextStyle(fontSize, FontWeightManager.regular,
+            color: color, locale: locale)
+        : _getTextStyle(fontSize, FontWeightManager.regular,
+            color: color, fontFamily: FontFamilyManager.englishFont);
   }
 
   static TextStyle getLightStyle(
-      {double fontSize = FontSize.s12, Color color = Colors.black, Locale? locale}) {
-    return locale != null 
-        ? _getLocalizedTextStyle(fontSize, FontWeightManager.light, color: color, locale: locale)
-        : _getTextStyle(fontSize, FontWeightManager.light, color: color, fontFamily: FontFamilyManager.englishFont);
+      {double fontSize = FontSize.s12,
+      Color color = Colors.black,
+      Locale? locale}) {
+    return locale != null
+        ? _getLocalizedTextStyle(fontSize, FontWeightManager.light,
+            color: color, locale: locale)
+        : _getTextStyle(fontSize, FontWeightManager.light,
+            color: color, fontFamily: FontFamilyManager.englishFont);
   }
 
   static TextStyle getBoldStyle(
@@ -50,42 +60,66 @@ abstract class TextStyleManager {
       double? letterSpacing = 1.5,
       double? height = 1.5,
       Locale? locale}) {
-    return locale != null 
+    return locale != null
         ? _getLocalizedTextStyle(fontSize, FontWeightManager.bold,
-            color: color, letterSpacing: letterSpacing, height: height, locale: locale)
+            color: color,
+            letterSpacing: letterSpacing,
+            height: height,
+            locale: locale)
         : _getTextStyle(fontSize, FontWeightManager.bold,
-            color: color, letterSpacing: letterSpacing, height: height, fontFamily: FontFamilyManager.englishFont);
+            color: color,
+            letterSpacing: letterSpacing,
+            height: height,
+            fontFamily: FontFamilyManager.englishFont);
   }
 
   static TextStyle getBlackStyle(
-      {double fontSize = FontSize.s36, Color color = Colors.black, Locale? locale}) {
-    return locale != null 
-        ? _getLocalizedTextStyle(fontSize, FontWeightManager.black, color: color, locale: locale)
-        : _getTextStyle(fontSize, FontWeightManager.black, color: color, fontFamily: FontFamilyManager.englishFont);
+      {double fontSize = FontSize.s36,
+      Color color = Colors.black,
+      Locale? locale}) {
+    return locale != null
+        ? _getLocalizedTextStyle(fontSize, FontWeightManager.black,
+            color: color, locale: locale)
+        : _getTextStyle(fontSize, FontWeightManager.black,
+            color: color, fontFamily: FontFamilyManager.englishFont);
   }
 
   static TextStyle getSemiBoldStyle(
-      {double fontSize = FontSize.s16, Color color = Colors.black, Locale? locale}) {
-    return locale != null 
-        ? _getLocalizedTextStyle(fontSize, FontWeightManager.semiBold, color: color, locale: locale)
-        : _getTextStyle(fontSize, FontWeightManager.semiBold, color: color, fontFamily: FontFamilyManager.englishFont);
+      {double fontSize = FontSize.s16,
+      Color color = Colors.black,
+      Locale? locale}) {
+    return locale != null
+        ? _getLocalizedTextStyle(fontSize, FontWeightManager.semiBold,
+            color: color, locale: locale)
+        : _getTextStyle(fontSize, FontWeightManager.semiBold,
+            color: color, fontFamily: FontFamilyManager.englishFont);
   }
 
   static TextStyle getMediumStyle(
-      {double fontSize = FontSize.s16, Color color = Colors.black, Locale? locale}) {
-    return locale != null 
-        ? _getLocalizedTextStyle(fontSize, FontWeightManager.medium, color: color, locale: locale)
-        : _getTextStyle(fontSize, FontWeightManager.medium, color: color, fontFamily: FontFamilyManager.englishFont);
+      {double fontSize = FontSize.s16,
+      Color color = Colors.black,
+      Locale? locale}) {
+    return locale != null
+        ? _getLocalizedTextStyle(fontSize, FontWeightManager.medium,
+            color: color, locale: locale)
+        : _getTextStyle(fontSize, FontWeightManager.medium,
+            color: color, fontFamily: FontFamilyManager.englishFont);
   }
 
   // Convenience methods for specific locales
   static TextStyle getArabicStyle(
-      {double fontSize = FontSize.s14, Color color = Colors.black, FontWeight fontWeight = FontWeightManager.regular}) {
-    return _getTextStyle(fontSize, fontWeight, color: color, fontFamily: FontFamilyManager.arabicFont);
+      {double fontSize = FontSize.s14,
+      Color color = Colors.black,
+      FontWeight fontWeight = FontWeightManager.regular}) {
+    return _getTextStyle(fontSize, fontWeight,
+        color: color, fontFamily: FontFamilyManager.arabicFont);
   }
 
   static TextStyle getEnglishStyle(
-      {double fontSize = FontSize.s14, Color color = Colors.black, FontWeight fontWeight = FontWeightManager.regular}) {
-    return _getTextStyle(fontSize, fontWeight, color: color, fontFamily: FontFamilyManager.englishFont);
+      {double fontSize = FontSize.s14,
+      Color color = Colors.black,
+      FontWeight fontWeight = FontWeightManager.regular}) {
+    return _getTextStyle(fontSize, fontWeight,
+        color: color, fontFamily: FontFamilyManager.englishFont);
   }
 }
