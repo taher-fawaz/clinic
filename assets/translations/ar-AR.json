@@ -15,5 +15,47 @@
     "description2": "تواصل مع أخصائيي الرعاية الصحية المؤهلين واحصل على الرعاية الطبية التي تستحقها.",
     "title3": "أدر صحتك",
     "description3": "تتبع تاريخك الطبي ووصفاتك ومواعيدك في مكان واحد."
+  },
+  "auth": {
+    "login": {
+      "title": "تسجيل دخول المريض",
+      "welcomeBack": "مرحباً بعودتك!",
+      "subtitle": "يرجى إدخال رقم هاتفك وكلمة المرور للمتابعة",
+      "phoneNumber": "رقم الهاتف",
+      "phoneHint": "أدخل رقم هاتفك",
+      "password": "كلمة المرور",
+      "passwordHint": "أدخل كلمة المرور",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "loginButton": "تسجيل الدخول",
+      "noAccount": "ليس لديك حساب؟ ",
+      "signUp": "إنشاء حساب",
+      "loginSuccess": "سيتم تنفيذ وظيفة تسجيل الدخول لاحقاً",
+      "forgotPasswordMessage": "سيتم تنفيذ وظيفة نسيان كلمة المرور لاحقاً"
+    },
+    "register": {
+      "title": "تسجيل مريض جديد",
+      "createAccount": "إنشاء حساب",
+      "subtitle": "يرجى ملء المعلومات أدناه لإنشاء حساب المريض الخاص بك",
+      "fullName": "الاسم الكامل",
+      "fullNameHint": "أدخل اسمك الكامل",
+      "phoneNumber": "رقم الهاتف",
+      "phoneHint": "أدخل رقم هاتفك",
+      "password": "كلمة المرور",
+      "passwordHint": "أدخل كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "confirmPasswordHint": "أكد كلمة المرور",
+      "termsAndConditions": "أوافق على الشروط والأحكام وسياسة الخصوصية",
+      "createAccountButton": "إنشاء حساب",
+      "alreadyHaveAccount": "لديك حساب بالفعل؟ ",
+      "signIn": "تسجيل الدخول",
+      "registerSuccess": "سيتم تنفيذ وظيفة التسجيل لاحقاً",
+      "validation": {
+        "enterName": "يرجى إدخال اسمك",
+        "enterPhone": "يرجى إدخال رقم هاتفك",
+        "enterPassword": "يرجى إدخال كلمة مرور",
+        "passwordsNotMatch": "كلمات المرور غير متطابقة",
+        "agreeToTerms": "يرجى الموافقة على الشروط والأحكام"
+      }
+    }
   }
 }

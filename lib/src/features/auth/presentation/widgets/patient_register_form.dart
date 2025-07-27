@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/extensions/integer_sizedbox_extension.dart';
@@ -31,27 +32,27 @@ class _PatientRegisterFormState extends State<PatientRegisterForm> {
   void _handleRegister() {
     // Simple validation without business logic
     if (_nameController.text.isEmpty) {
-      _showMessage('Please enter your name');
+      _showMessage('auth.register.validation.enterName'.tr());
       return;
     }
 
     if (_phoneController.text.isEmpty) {
-      _showMessage('Please enter your phone number');
+      _showMessage('auth.register.validation.enterPhone'.tr());
       return;
     }
 
     if (_passwordController.text.isEmpty) {
-      _showMessage('Please enter a password');
+      _showMessage('auth.register.validation.enterPassword'.tr());
       return;
     }
 
     if (_passwordController.text != _confirmPasswordController.text) {
-      _showMessage('Passwords do not match');
+      _showMessage('auth.register.validation.passwordsNotMatch'.tr());
       return;
     }
 
     if (!_agreeToTerms) {
-      _showMessage('Please agree to the terms and conditions');
+      _showMessage('auth.register.validation.agreeToTerms'.tr());
       return;
     }
 
@@ -69,9 +70,8 @@ class _PatientRegisterFormState extends State<PatientRegisterForm> {
 
         // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content:
-                Text('Registration functionality will be implemented later'),
+          SnackBar(
+            content: Text('auth.register.registerSuccess'.tr()),
             backgroundColor: Colors.green,
           ),
         );
@@ -97,8 +97,8 @@ class _PatientRegisterFormState extends State<PatientRegisterForm> {
           controller: _nameController,
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
-            labelText: 'Full Name',
-            hintText: 'Enter your full name',
+            labelText: 'auth.register.fullName'.tr(),
+            hintText: 'auth.register.fullNameHint'.tr(),
             prefixIcon: const Icon(Icons.person),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
@@ -120,8 +120,8 @@ class _PatientRegisterFormState extends State<PatientRegisterForm> {
           controller: _phoneController,
           keyboardType: TextInputType.phone,
           decoration: InputDecoration(
-            labelText: 'Phone Number',
-            hintText: 'Enter your phone number',
+            labelText: 'auth.register.phoneNumber'.tr(),
+            hintText: 'auth.register.phoneHint'.tr(),
             prefixIcon: const Icon(Icons.phone),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
@@ -143,8 +143,8 @@ class _PatientRegisterFormState extends State<PatientRegisterForm> {
           controller: _passwordController,
           obscureText: !_isPasswordVisible,
           decoration: InputDecoration(
-            labelText: 'Password',
-            hintText: 'Enter your password',
+            labelText: 'auth.register.password'.tr(),
+            hintText: 'auth.register.passwordHint'.tr(),
             prefixIcon: const Icon(Icons.lock),
             suffixIcon: IconButton(
               icon: Icon(
@@ -176,8 +176,8 @@ class _PatientRegisterFormState extends State<PatientRegisterForm> {
           controller: _confirmPasswordController,
           obscureText: !_isConfirmPasswordVisible,
           decoration: InputDecoration(
-            labelText: 'Confirm Password',
-            hintText: 'Confirm your password',
+            labelText: 'auth.register.confirmPassword'.tr(),
+            hintText: 'auth.register.confirmPasswordHint'.tr(),
             prefixIcon: const Icon(Icons.lock_outline),
             suffixIcon: IconButton(
               icon: Icon(
@@ -226,7 +226,7 @@ class _PatientRegisterFormState extends State<PatientRegisterForm> {
                   });
                 },
                 child: Text(
-                  'I agree to the Terms and Conditions and Privacy Policy',
+                  'auth.register.termsAndConditions'.tr(),
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: Colors.grey[700],
@@ -261,7 +261,7 @@ class _PatientRegisterFormState extends State<PatientRegisterForm> {
                     ),
                   )
                 : Text(
-                    'Create Account',
+                    'auth.register.createAccountButton'.tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16.sp,

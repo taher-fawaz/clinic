@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/extensions/integer_sizedbox_extension.dart';
+import '../../../../routes/app_route_path.dart';
 import '../widgets/patient_register_form.dart';
 
 class PatientRegisterPage extends StatelessWidget {
@@ -17,10 +18,16 @@ class PatientRegisterPage extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.goNamed(AppRoute.login.name);
+            }
+          },
         ),
         title: Text(
-          'Patient Registration',
+          'auth.register.title'.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 18.sp,
@@ -38,7 +45,7 @@ class PatientRegisterPage extends StatelessWidget {
               children: [
                 32.hS,
                 Text(
-                  'Create Account',
+                  'auth.register.createAccount'.tr(),
                   style: TextStyle(
                     fontSize: 28.sp,
                     fontWeight: FontWeight.bold,
@@ -47,7 +54,7 @@ class PatientRegisterPage extends StatelessWidget {
                 ),
                 8.hS,
                 Text(
-                  'Please fill in the information below to create your patient account',
+                  'auth.register.subtitle'.tr(),
                   style: TextStyle(
                     fontSize: 16.sp,
                     color: Colors.grey[600],
@@ -60,7 +67,7 @@ class PatientRegisterPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Already have an account? ",
+                      'auth.register.alreadyHaveAccount'.tr(),
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: Colors.grey[600],
@@ -68,11 +75,15 @@ class PatientRegisterPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Navigate back to patient login page
-                        context.pop();
+                        // Navigate to patient login page
+                        if (context.canPop()) {
+                          context.pop();
+                        } else {
+                          context.goNamed(AppRoute.login.name);
+                        }
                       },
                       child: Text(
-                        'Sign In',
+                        'auth.register.signIn'.tr(),
                         style: TextStyle(
                           fontSize: 14.sp,
                           color: Theme.of(context).primaryColor,

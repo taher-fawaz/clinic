@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/extensions/integer_sizedbox_extension.dart';
@@ -37,8 +38,8 @@ class _PatientLoginFormState extends State<PatientLoginForm> {
 
         // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login functionality will be implemented later'),
+          SnackBar(
+            content: Text('auth.login.loginSuccess'.tr()),
             backgroundColor: Colors.blue,
           ),
         );
@@ -55,8 +56,8 @@ class _PatientLoginFormState extends State<PatientLoginForm> {
           controller: _phoneController,
           keyboardType: TextInputType.phone,
           decoration: InputDecoration(
-            labelText: 'Phone Number',
-            hintText: 'Enter your phone number',
+            labelText: 'auth.login.phoneNumber'.tr(),
+            hintText: 'auth.login.phoneHint'.tr(),
             prefixIcon: const Icon(Icons.phone),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
@@ -78,8 +79,8 @@ class _PatientLoginFormState extends State<PatientLoginForm> {
           controller: _passwordController,
           obscureText: !_isPasswordVisible,
           decoration: InputDecoration(
-            labelText: 'Password',
-            hintText: 'Enter your password',
+            labelText: 'auth.login.password'.tr(),
+            hintText: 'auth.login.passwordHint'.tr(),
             prefixIcon: const Icon(Icons.lock),
             suffixIcon: IconButton(
               icon: Icon(
@@ -111,14 +112,13 @@ class _PatientLoginFormState extends State<PatientLoginForm> {
           child: TextButton(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text(
-                      'Forgot password functionality will be implemented later'),
+                SnackBar(
+                  content: Text('auth.login.forgotPasswordMessage'.tr()),
                 ),
               );
             },
             child: Text(
-              'Forgot Password?',
+              'auth.login.forgotPassword'.tr(),
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontSize: 14.sp,
@@ -152,7 +152,7 @@ class _PatientLoginFormState extends State<PatientLoginForm> {
                     ),
                   )
                 : Text(
-                    'Login',
+                    'auth.login.loginButton'.tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16.sp,

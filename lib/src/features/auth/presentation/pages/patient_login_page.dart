@@ -21,7 +21,7 @@ class PatientLoginPage extends StatelessWidget {
           onPressed: () => context.pop(),
         ),
         title: Text(
-          'Patient Login',
+          'auth.login.title'.tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 18.sp,
@@ -38,7 +38,7 @@ class PatientLoginPage extends StatelessWidget {
             children: [
               32.hS,
               Text(
-                'Welcome Back!',
+                'auth.login.welcomeBack'.tr(),
                 style: TextStyle(
                   fontSize: 28.sp,
                   fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ class PatientLoginPage extends StatelessWidget {
               ),
               8.hS,
               Text(
-                'Please enter your phone number and password to continue',
+                'auth.login.subtitle'.tr(),
                 style: TextStyle(
                   fontSize: 16.sp,
                   color: Colors.grey[600],
@@ -60,7 +60,7 @@ class PatientLoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Don't have an account? ",
+                    'auth.login.noAccount'.tr(),
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Colors.grey[600],
@@ -72,7 +72,7 @@ class PatientLoginPage extends StatelessWidget {
                       context.goNamed(AppRoute.register.name);
                     },
                     child: Text(
-                      'Sign Up',
+                      'auth.login.signUp'.tr(),
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: Theme.of(context).primaryColor,
