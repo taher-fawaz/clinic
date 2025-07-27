@@ -3,8 +3,7 @@ import 'package:clinic/core/services/custom_bloc_observer.dart';
 import 'package:clinic/core/services/get_it_service.dart';
 import 'package:clinic/core/services/shared_preferences_singleton.dart';
 import 'package:clinic/core/utils/app_colors.dart';
-import 'package:clinic/features/auth/domain/repos/auth_repo.dart';
-import 'package:clinic/features/auth/presentation/cubits/signin_cubit/signin_cubit.dart';
+
 import 'package:clinic/features/splash/presentation/views/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -34,24 +33,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SigninCubit(
-        getIt.get<AuthRepo>(),
-      ),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          fontFamily: 'Cairo',
-          scaffoldBackgroundColor: Colors.white,
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: AppColors.primaryColor,
-          ),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        fontFamily: 'Cairo',
+        scaffoldBackgroundColor: Colors.white,
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primaryColor,
         ),
-        onGenerateRoute: onGenerateRoute,
-        initialRoute: SplashView.routeName,
-        debugShowCheckedModeBanner: false,
       ),
+      onGenerateRoute: onGenerateRoute,
+      initialRoute: SplashView.routeName,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

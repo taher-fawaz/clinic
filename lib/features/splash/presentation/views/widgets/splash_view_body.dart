@@ -1,5 +1,4 @@
-import 'package:clinic/features/auth/presentation/views/signin_view.dart';
-import 'package:clinic/features/main_view/presentation/pages/main_view.dart';
+
 import 'package:clinic/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic/constants.dart';
@@ -41,9 +40,9 @@ class _SplashViewBodyState extends State<SplashViewBody> {
         var isLoggedIn = FirebaseAuthService().isLoggedIn();
 
         if (isLoggedIn) {
-          Navigator.pushReplacementNamed(context, MainView.routeName);
+          // Navigator.pushReplacementNamed(context, MainView.routeName);
         } else {
-          Navigator.pushReplacementNamed(context, SigninView.routeName);
+          // Navigator.pushReplacementNamed(context, SigninView.routeName);
         }
       } else {
         Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
