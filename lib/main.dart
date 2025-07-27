@@ -33,9 +33,9 @@ void main() async {
 
   runApp(
     EasyLocalization(
-      supportedLocales: const [indonesiaLocale, englishLocale],
+      supportedLocales: const [arabicLocale, englishLocale],
       path: "assets/translations",
-      startLocale: indonesiaLocale,
+      startLocale: arabicLocale,
       child: const MyApp(),
     ),
   );

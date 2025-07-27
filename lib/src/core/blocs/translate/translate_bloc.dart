@@ -5,13 +5,13 @@ part 'translate_event.dart';
 part 'translate_state.dart';
 
 class TranslateBloc extends HydratedBloc<TranslateEvent, TranslateState> {
-  TranslateBloc() : super(const TranslateState("id", "ID", "EN")) {
-    on<TrIndonesiaEvent>(_trIndonesia);
+  TranslateBloc() : super(const TranslateState("ar", "AR", "EN")) {
+    on<TrArabicEvent>(_trArabic);
     on<TrEnglishEvent>(_trEnglish);
   }
 
-  Future _trIndonesia(TrIndonesiaEvent event, Emitter emit) async {
-    emit(TranslateState("id", "ID", state.countryCode));
+  Future _trArabic(TrArabicEvent event, Emitter emit) async {
+    emit(TranslateState("ar", "AR", state.countryCode));
   }
 
   Future _trEnglish(TrEnglishEvent event, Emitter emit) async {

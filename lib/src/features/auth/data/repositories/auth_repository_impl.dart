@@ -7,10 +7,14 @@ import '../../../../core/errors/failures.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/usecases/usecase_params.dart';
+import '../../domain/usecases/patient_login_usecase.dart';
+import '../../domain/usecases/patient_register_usecase.dart';
 import '../datasources/auth_local_datasource.dart';
 import '../datasources/auth_remote_datasource.dart';
 import '../models/login_model.dart';
 import '../models/register_model.dart';
+import '../models/patient_login_model.dart';
+import '../models/patient_register_model.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _authRemoteDataSource;
@@ -23,30 +27,6 @@ class AuthRepositoryImpl implements AuthRepository {
     this._secureLocalStorage,
     this._localStorage,
   );
-
-  @override
-  Future<Either<Failure, UserEntity>> login(LoginParams params) async {
-    try {
-      final model = LoginModel(
-        email: params.email,
-        password: params.password,
-      );
-
-      final result = await _authRemoteDataSource.login(model);
-      if (result.password != params.password) {
-        return Left(CredentialFailure());
-      }
-
-      await _secureLocalStorage.save(key: "user_id", value: result.userId);
-      await _localStorage.save(key: "user", value: result, boxName: "cache");
-
-      return Right(result);
-    } on AuthException {
-      return Left(CredentialFailure());
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
 
   @override
   Future<Either<Failure, void>> logout() async {
@@ -63,24 +43,6 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> register(RegisterParams params) async {
-    try {
-      final model = RegisterModel(
-        username: params.username,
-        email: params.email,
-        password: params.password,
-      );
-
-      final result = await _authRemoteDataSource.register(model);
-      return Right(result);
-    } on DuplicateEmailException {
-      return Left(DuplicateEmailFailure());
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
-
-  @override
   Future<Either<Failure, UserEntity>> checkSignInStatus() async {
     try {
       final result = await _authLocalDataSource.checkSignInStatus();
@@ -88,6 +50,47 @@ class AuthRepositoryImpl implements AuthRepository {
       return Right(result);
     } on CacheException {
       return Left(CacheFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> patientLogin(
+      PatientLoginParams params) async {
+    try {
+      final model = PatientLoginModel(
+        phoneNumber: params.phoneNumber,
+        password: params.password,
+      );
+
+      final result = await _authRemoteDataSource.patientLogin(model);
+
+      await _secureLocalStorage.save(key: "user_id", value: result.userId);
+      await _localStorage.save(key: "user", value: result, boxName: "cache");
+
+      return Right(result);
+    } on AuthException {
+      return Left(CredentialFailure());
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> patientRegister(
+      PatientRegisterParams params) async {
+    try {
+      final model = PatientRegisterModel(
+        username: params.name,
+        phoneNumber: params.phoneNumber,
+        password: params.password,
+      );
+
+      final result = await _authRemoteDataSource.patientRegister(model);
+      return Right(result);
+    } on DuplicatePhoneException {
+      return Left(DuplicatePhoneFailure());
+    } on ServerException {
+      return Left(ServerFailure());
     }
   }
 }

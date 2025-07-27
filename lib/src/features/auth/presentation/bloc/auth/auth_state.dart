@@ -87,3 +87,45 @@ class AuthCheckSignInStatusFailureState extends AuthState {
   @override
   List<Object?> get props => [message];
 }
+
+// Patient Login States
+class PatientLoginLoadingState extends AuthState {}
+
+class PatientLoginSuccessState extends AuthState {
+  final UserEntity data;
+
+  const PatientLoginSuccessState(this.data);
+
+  @override
+  List<Object?> get props => [data];
+}
+
+class PatientLoginFailureState extends AuthState {
+  final String message;
+
+  const PatientLoginFailureState(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+// Patient Register States
+class PatientRegisterLoadingState extends AuthState {}
+
+class PatientRegisterSuccessState extends AuthState {
+  final String message;
+
+  const PatientRegisterSuccessState(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class PatientRegisterFailureState extends AuthState {
+  final String message;
+
+  const PatientRegisterFailureState(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}

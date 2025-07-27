@@ -15,8 +15,14 @@ class CredentialFailure extends Failure {}
 
 class DuplicateEmailFailure extends Failure {}
 
+class DuplicatePhoneFailure extends Failure {}
+
 class PasswordNotMatchFailure extends Failure {}
 
 class InvalidEmailFailure extends Failure {}
 
 class InvalidPasswordFailure extends Failure {}
+
+class InvalidPhoneNumberFailure extends Failure {}
+
+class InvalidNameFailure extends Failure {}

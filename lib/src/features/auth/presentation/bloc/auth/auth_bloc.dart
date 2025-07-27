@@ -6,45 +6,29 @@ import '../../../../../core/utils/failure_converter.dart';
 import '../../../../../core/utils/logger.dart';
 import '../../../domain/entities/user_entity.dart';
 import '../../../domain/usecases/check_signin_status_usecase.dart';
-import '../../../domain/usecases/login_usecase.dart';
 import '../../../domain/usecases/logout_usecase.dart';
-import '../../../domain/usecases/register_usecase.dart';
+import '../../../domain/usecases/patient_login_usecase.dart';
+import '../../../domain/usecases/patient_register_usecase.dart';
 import '../../../domain/usecases/usecase_params.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthLoginUseCase _loginUseCase;
-  final AuthRegisterUseCase _registerUseCase;
   final AuthLogoutUseCase _logoutUseCase;
   final AuthCheckSignInStatusUseCase _checkSignInStatusUseCase;
+  final PatientLoginUseCase _patientLoginUseCase;
+  final PatientRegisterUseCase _patientRegisterUseCase;
   AuthBloc(
-    this._loginUseCase,
     this._logoutUseCase,
-    this._registerUseCase,
     this._checkSignInStatusUseCase,
+    this._patientLoginUseCase,
+    this._patientRegisterUseCase,
   ) : super(AuthInitialState()) {
-    on<AuthLoginEvent>(_login);
     on<AuthLogoutEvent>(_logout);
-    on<AuthRegisterEvent>(_register);
     on<AuthCheckSignInStatusEvent>(_checkSignInStatus);
-  }
-
-  Future _login(AuthLoginEvent event, Emitter emit) async {
-    emit(AuthLoginLoadingState());
-
-    final result = await _loginUseCase.call(
-      LoginParams(
-        email: event.email,
-        password: event.password,
-      ),
-    );
-
-    result.fold(
-      (l) => emit(AuthLoginFailureState(mapFailureToMessage(l))),
-      (r) => emit(AuthLoginSuccessState(r)),
-    );
+    on<PatientLoginEvent>(_patientLogin);
+    on<PatientRegisterEvent>(_patientRegister);
   }
 
   Future _logout(AuthLogoutEvent event, Emitter emit) async {
@@ -58,24 +42,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  Future _register(AuthRegisterEvent event, Emitter emit) async {
-    emit(AuthRegisterLoadingState());
-
-    final result = await _registerUseCase.call(
-      RegisterParams(
-        username: event.username,
-        email: event.email,
-        password: event.password,
-        confirmPassword: event.confirmPassword,
-      ),
-    );
-
-    result.fold(
-      (l) => emit(AuthRegisterFailureState(mapFailureToMessage(l))),
-      (r) => emit(const AuthRegisterSuccessState("Register Success")),
-    );
-  }
-
   Future _checkSignInStatus(
       AuthCheckSignInStatusEvent event, Emitter emit) async {
     emit(AuthCheckSignInStatusLoadingState());
@@ -85,6 +51,40 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     result.fold(
       (l) => emit(AuthCheckSignInStatusFailureState(mapFailureToMessage(l))),
       (r) => emit(AuthCheckSignInStatusSuccessState(r)),
+    );
+  }
+
+  Future _patientLogin(PatientLoginEvent event, Emitter emit) async {
+    emit(PatientLoginLoadingState());
+
+    final result = await _patientLoginUseCase.call(
+      PatientLoginParams(
+        phoneNumber: event.phoneNumber,
+        password: event.password,
+      ),
+    );
+
+    result.fold(
+      (l) => emit(PatientLoginFailureState(mapFailureToMessage(l))),
+      (r) => emit(PatientLoginSuccessState(r)),
+    );
+  }
+
+  Future _patientRegister(PatientRegisterEvent event, Emitter emit) async {
+    emit(PatientRegisterLoadingState());
+
+    final result = await _patientRegisterUseCase.call(
+      PatientRegisterParams(
+        name: event.name,
+        phoneNumber: event.phoneNumber,
+        password: event.password,
+      ),
+    );
+
+    result.fold(
+      (l) => emit(PatientRegisterFailureState(mapFailureToMessage(l))),
+      (r) => emit(
+          const PatientRegisterSuccessState("Patient registration successful")),
     );
   }
 

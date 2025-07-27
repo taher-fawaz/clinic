@@ -5,18 +5,35 @@ import '../../../../core/utils/logger.dart';
 import '../models/login_model.dart';
 import '../models/register_model.dart';
 import '../models/user_model.dart';
+import '../models/patient_login_model.dart';
+import '../models/patient_register_model.dart';
+import '../models/patient_login_response_model.dart';
+import '../models/patient_register_response_model.dart';
 
 sealed class AuthRemoteDataSource {
-  Future<UserModel> login(LoginModel model);
   Future<void> logout();
-  Future<void> register(RegisterModel model);
+
+  // Patient-specific methods
+  Future<UserModel> patientLogin(PatientLoginModel model);
+  Future<void> patientRegister(PatientRegisterModel model);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
-  Future<UserModel> login(LoginModel model) async {
+  Future<void> logout() async {
     try {
-      final user = await _getUserByEmail(model.email ?? "");
+      await Future.delayed(const Duration(seconds: 1));
+      return;
+    } catch (e) {
+      logger.e(e);
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<UserModel> patientLogin(PatientLoginModel model) async {
+    try {
+      final user = await _getUserByPhone(model.phoneNumber ?? "");
 
       return user;
     } on EmptyException {
@@ -31,28 +48,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<void> logout() async {
+  Future<void> patientRegister(PatientRegisterModel model) async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
-      return;
-    } catch (e) {
-      logger.e(e);
-      throw ServerException();
-    }
-  }
-
-  @override
-  Future<void> register(RegisterModel model) async {
-    try {
-      final user = await _getUserByEmail(model.email ?? "");
-      if (user.email == model.email) {
-        throw DuplicateEmailException();
+      final user = await _getUserByPhone(model.phoneNumber ?? "");
+      if (user.phoneNumber == model.phoneNumber) {
+        throw DuplicatePhoneException();
       }
 
       return;
     } on EmptyException {
-      await ApiUrl.users.add(model.toMap());
-    } on DuplicateEmailException {
+      await ApiUrl.patients.add(model.toMap());
+    } on DuplicatePhoneException {
       rethrow;
     } catch (e) {
       logger.e(e);
@@ -63,6 +69,23 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<UserModel> _getUserByEmail(String email) async {
     try {
       final result = await ApiUrl.users.where("email", isEqualTo: email).get();
+      final doc = result.docs.first;
+      final user = UserModel.fromJson(doc.data(), doc.id);
+
+      return user;
+    } catch (e) {
+      if (e.toString() == noElement) {
+        throw EmptyException();
+      }
+      logger.e(e);
+      throw ServerException();
+    }
+  }
+
+  Future<UserModel> _getUserByPhone(String phone) async {
+    try {
+      final result =
+          await ApiUrl.patients.where("phone", isEqualTo: phone).get();
       final doc = result.docs.first;
       final user = UserModel.fromJson(doc.data(), doc.id);
 

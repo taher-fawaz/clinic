@@ -8,4 +8,5 @@ class ApiUrl {
   // static const products = "/products";
   static final products = FirebaseFirestore.instance.collection("products");
   static final users = FirebaseFirestore.instance.collection("users");
+  static final patients = FirebaseFirestore.instance.collection("patients");
 }

@@ -42,3 +42,32 @@ class AuthRegisterEvent extends AuthEvent {
 class AuthLogoutEvent extends AuthEvent {}
 
 class AuthCheckSignInStatusEvent extends AuthEvent {}
+
+class PatientLoginEvent extends AuthEvent {
+  final String phoneNumber;
+  final String password;
+
+  const PatientLoginEvent(this.phoneNumber, this.password);
+
+  @override
+  List<Object?> get props => [phoneNumber, password];
+}
+
+class PatientRegisterEvent extends AuthEvent {
+  final String name;
+  final String phoneNumber;
+  final String password;
+
+  const PatientRegisterEvent(
+    this.name,
+    this.phoneNumber,
+    this.password,
+  );
+
+  @override
+  List<Object?> get props => [
+        name,
+        phoneNumber,
+        password,
+      ];
+}

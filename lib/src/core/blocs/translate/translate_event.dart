@@ -7,6 +7,6 @@ sealed class TranslateEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class TrIndonesiaEvent extends TranslateEvent {}
+class TrArabicEvent extends TranslateEvent {}
 
 class TrEnglishEvent extends TranslateEvent {}

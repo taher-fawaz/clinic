@@ -12,6 +12,8 @@ String mapFailureToMessage(Failure failure) {
       return "Wrong Email or Password";
     case DuplicateEmailFailure:
       return "Email already taken";
+    case DuplicatePhoneFailure:
+      return "Phone number already taken";
     case PasswordNotMatchFailure:
       return "Password not match";
     case InvalidEmailFailure:

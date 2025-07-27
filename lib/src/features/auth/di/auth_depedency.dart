@@ -5,9 +5,9 @@ import '../data/datasources/auth_local_datasource.dart';
 import '../data/datasources/auth_remote_datasource.dart';
 import '../data/repositories/auth_repository_impl.dart';
 import '../domain/usecases/check_signin_status_usecase.dart';
-import '../domain/usecases/login_usecase.dart';
 import '../domain/usecases/logout_usecase.dart';
-import '../domain/usecases/register_usecase.dart';
+import '../domain/usecases/patient_login_usecase.dart';
+import '../domain/usecases/patient_register_usecase.dart';
 import '../presentation/bloc/auth/auth_bloc.dart';
 import '../presentation/bloc/auth_login_form/auth_login_form_bloc.dart';
 import '../presentation/bloc/auth_register_form/auth_register_form_bloc.dart';
@@ -17,15 +17,6 @@ class AuthDepedency {
 
   static void init() {
     getIt.registerFactory(
-      () => AuthBloc(
-        getIt<AuthLoginUseCase>(),
-        getIt<AuthLogoutUseCase>(),
-        getIt<AuthRegisterUseCase>(),
-        getIt<AuthCheckSignInStatusUseCase>(),
-      ),
-    );
-
-    getIt.registerFactory(
       () => AuthLoginFormBloc(),
     );
 
@@ -34,7 +25,7 @@ class AuthDepedency {
     );
 
     getIt.registerLazySingleton(
-      () => AuthLoginUseCase(
+      () => PatientLoginUseCase(
         getIt<AuthRepositoryImpl>(),
       ),
     );
@@ -46,13 +37,13 @@ class AuthDepedency {
     );
 
     getIt.registerLazySingleton(
-      () => AuthRegisterUseCase(
+      () => AuthCheckSignInStatusUseCase(
         getIt<AuthRepositoryImpl>(),
       ),
     );
 
     getIt.registerLazySingleton(
-      () => AuthCheckSignInStatusUseCase(
+      () => PatientRegisterUseCase(
         getIt<AuthRepositoryImpl>(),
       ),
     );
@@ -74,6 +65,15 @@ class AuthDepedency {
       () => AuthLocalDataSourceImpl(
         getIt<SecureLocalStorage>(),
         getIt<HiveLocalStorage>(),
+      ),
+    );
+
+    getIt.registerFactory(
+      () => AuthBloc(
+        getIt<AuthLogoutUseCase>(),
+        getIt<AuthCheckSignInStatusUseCase>(),
+        getIt<PatientLoginUseCase>(),
+        getIt<PatientRegisterUseCase>(),
       ),
     );
   }
