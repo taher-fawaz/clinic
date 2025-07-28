@@ -8,7 +8,10 @@ abstract class AppMargin {
   static const double m05 = .50;
   static const double m06 = .60;
 
+  static const double m4 = 4;
   static const double m12 = 12;
+  static const double m16 = 16;
+  static const double m20 = 20;
 }
 
 abstract class AppPadding {
@@ -76,6 +79,7 @@ abstract class AppSize {
   static const double s4 = 4;
   static const double s6 = 6;
   static const double s8 = 8;
+  static const double s10 = 10;
   static const double s12 = 12;
   static const double s14 = 14;
 

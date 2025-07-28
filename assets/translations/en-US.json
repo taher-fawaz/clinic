@@ -118,7 +118,6 @@
     "noSlotsAvailable": "No slots available",
     "selectDifferentDate": "Please select a different date",
     "errorLoadingSlots": "Error loading slots",
-    "appointmentId": "Appointment ID",
     "bookingConfirmed": "Booking Confirmed",
     "bookingSummary": "Booking Summary",
     "totalPrice": "Total Price",
@@ -144,12 +143,8 @@
     "errorLoadingAppointments": "Error loading appointments",
     "noAppointments": "No Appointments",
     "noAppointmentsDescription": "You don't have any appointments yet. Book your first appointment to get started.",
-    "summary": "Summary",
-    "details": "Appointment Details",
-    "createdAt": "Created At",
-    "notes": "Notes",
+  
     "rating": "Rating",
-    "loadingHistory": "Loading history...",
     "errorLoadingHistory": "Error loading appointment history",
     "noHistory": "No History",
     "noHistoryDescription": "You haven't completed any appointments yet. Your visit history will appear here.",
@@ -221,7 +216,6 @@
       "title": "Medical Attachments",
       "allTitle": "All Medical Attachments",
       "empty": "No medical attachments available",
-      "noFiltered": "No files match the selected filter",
       "filter": {
         "all": "All Files",
         "images": "Images",
@@ -404,6 +398,7 @@
       "current": "Current Language",
       "select": "Select Language"
     },
+    
     "address": {
       "title": "Address Information",
       "street": "Street Address",
@@ -425,6 +420,58 @@
       "postalCodeRequired": "Postal code is required",
       "countryRequired": "Country is required"
     }
+  },
+  "doctorWorks": {
+      "title": "Doctor Works",
+      "subtitle": "Browse our successful treatment cases",
+      "cases": "Cases",
+      "before": "Before",
+      "after": "After",
+      "showBefore": "Show Before",
+      "showAfter": "Show After",
+      "treatmentDetails": "Treatment Details",
+      "treatmentType": "Treatment Type",
+      "treatmentBy": "Treatment by",
+      "duration": "Duration",
+      "date": "Date",
+      "description": "Description",
+      "tags": "Tags",
+      "noResults": "No work cases found",
+      "loadingError": "Error loading work cases",
+      "retry": "Retry",
+      "share": "Share Treatment Case",
+      "shareAsText": "Share as Text",
+      "shareAsTextSubtitle": "Share treatment details as text",
+      "shareWithImages": "Share with Images",
+      "shareWithImagesSubtitle": "Include before/after images",
+      "copyToClipboard": "Copy to Clipboard",
+      "copyToClipboardSubtitle": "Copy treatment details",
+      "copiedToClipboard": "Copied to clipboard"
+    },
+    "sharing": {
+      "share": "Share",
+      "shareCase": "Share Treatment Case",
+      "shareAsText": "Share as Text",
+      "shareAsTextSubtitle": "Share treatment details as text",
+      "shareWithImages": "Share with Images",
+      "shareWithImagesSubtitle": "Include before/after images",
+      "copyToClipboard": "Copy to Clipboard",
+      "copyToClipboardSubtitle": "Copy treatment details",
+      "copiedToClipboard": "Copied to clipboard"
+    },
+    "common": {
+      "doctor": "Dr.",
+      "specialty": "Specialty",
+      "date": "Date"
+    },
+  "articles": {
+    "title": "Doctor Articles",
+    "subtitle": "Latest medical insights and health tips",
+    "loading": "Loading articles...",
+    "loadingError": "Failed to load articles",
+    "retry": "Try Again",
+    "noResults": "No Articles Available",
+    "noResultsSubtitle": "Check back later for new medical articles and health insights"
   },
   "common": {
     "loading": "Loading...",

@@ -144,12 +144,8 @@
     "errorLoadingAppointments": "خطأ في تحميل المواعيد",
     "noAppointments": "لا توجد مواعيد",
     "noAppointmentsDescription": "ليس لديك أي مواعيد حتى الآن. احجز موعدك الأول للبدء.",
-    "summary": "الملخص",
-    "details": "تفاصيل الموعد",
-    "createdAt": "تاريخ الإنشاء",
-    "notes": "الملاحظات",
+ 
     "rating": "التقييم",
-    "loadingHistory": "جاري تحميل التاريخ...",
     "errorLoadingHistory": "خطأ في تحميل تاريخ المواعيد",
     "noHistory": "لا يوجد تاريخ",
     "noHistoryDescription": "لم تكمل أي مواعيد بعد. سيظهر تاريخ زياراتك هنا.",
@@ -160,7 +156,6 @@
     "summary": "الملخص",
     "details": "تفاصيل الموعد",
     "visitDetails": "تفاصيل الزيارة",
-    "appointmentId": "رقم الموعد",
     "createdAt": "تاريخ الإنشاء",
     "completedAt": "تاريخ الإكمال",
     "diagnosis": "التشخيص",
@@ -220,8 +215,7 @@
     "attachments": {
       "title": "المرفقات الطبية",
       "allTitle": "جميع المرفقات الطبية",
-      "empty": "لا توجد مرفقات طبية متاحة",
-      "noFiltered": "لا توجد ملفات تطابق الفلتر المحدد",
+    
       "filter": {
         "all": "جميع الملفات",
         "images": "الصور",
@@ -300,7 +294,6 @@
     "legal": {
       "title": "القانونية",
       "termsSubtitle": "عرض شروط الخدمة الخاصة بنا",
-      "privacy": "سياسة الخصوصية",
       "privacySubtitle": "عرض سياسة الخصوصية الخاصة بنا",
       "termsAndPrivacy": "الشروط والخصوصية",
       "termsDescription": "عرض شروط الخدمة وسياسة الخصوصية",
@@ -406,6 +399,7 @@
       "current": "اللغة الحالية",
       "select": "اختر اللغة"
     },
+    
     "address": {
       "title": "معلومات العنوان",
       "street": "عنوان الشارع",
@@ -428,6 +422,50 @@
       "countryRequired": "البلد مطلوب"
     }
   },
+  "doctorWorks": {
+      "title": "أعمال الطبيب",
+      "subtitle": "تصفح حالات العلاج الناجحة",
+      "cases": "الحالات",
+      "before": "قبل",
+      "after": "بعد",
+      "showBefore": "إظهار قبل",
+      "showAfter": "إظهار بعد",
+      "treatmentDetails": "تفاصيل العلاج",
+      "treatmentType": "نوع العلاج",
+      "treatmentBy": "العلاج بواسطة",
+      "duration": "المدة",
+      "date": "التاريخ",
+      "description": "الوصف",
+      "tags": "العلامات",
+      "noResults": "لم يتم العثور على حالات عمل",
+      "loadingError": "خطأ في تحميل حالات العمل",
+      "retry": "إعادة المحاولة",
+      "share": "مشاركة حالة العلاج",
+      "shareAsText": "مشاركة كنص",
+      "shareAsTextSubtitle": "مشاركة تفاصيل العلاج كنص",
+      "shareWithImages": "مشاركة مع الصور",
+      "shareWithImagesSubtitle": "تضمين صور قبل/بعد",
+      "copyToClipboard": "نسخ إلى الحافظة",
+      "copyToClipboardSubtitle": "نسخ تفاصيل العلاج",
+      "copiedToClipboard": "تم النسخ إلى الحافظة",
+      "cases": "حالات العمل"
+    },
+    "sharing": {
+      "share": "مشاركة",
+      "shareCase": "مشاركة حالة العلاج",
+      "shareAsText": "مشاركة كنص",
+      "shareAsTextSubtitle": "مشاركة تفاصيل العلاج كنص",
+      "shareWithImages": "مشاركة مع الصور",
+      "shareWithImagesSubtitle": "تضمين صور قبل/بعد",
+      "copyToClipboard": "نسخ إلى الحافظة",
+      "copyToClipboardSubtitle": "نسخ تفاصيل العلاج",
+      "copiedToClipboard": "تم النسخ إلى الحافظة"
+    },
+    "common": {
+      "doctor": "د.",
+      "specialty": "التخصص",
+      "date": "التاريخ"
+    },
   "common": {
     "loading": "جاري التحميل...",
     "error": "خطأ",

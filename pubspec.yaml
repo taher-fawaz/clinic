@@ -50,6 +50,7 @@ dependencies:
   path_provider: ^2.0.15
   easy_localization: ^3.0.2
   persistent_bottom_nav_bar: ^6.2.1
+  share_plus: ^7.2.2
 
 dev_dependencies:
   flutter_launcher_icons: "^0.14.3"

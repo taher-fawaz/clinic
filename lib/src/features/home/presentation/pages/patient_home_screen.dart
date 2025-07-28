@@ -5,7 +5,11 @@ import 'package:clinic/src/features/appointment/presentation/screens/book_appoin
 import 'package:clinic/src/features/home/presentation/widgets/book_appointment_section.dart';
 import 'package:clinic/src/features/patient_medical_record/presentation/screens/patient_medical_record_screen.dart';
 import 'package:clinic/src/features/profile/presentation/pages/patient_profile_screen.dart';
+import 'package:clinic/src/features/doctor_works/presentation/pages/doctor_work_showcase_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/doctor_articles_screen.dart';
+import '../screens/article_details_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -151,7 +155,12 @@ class _HomeTab extends StatelessWidget {
                 DoctorWorkCarousel(
                   doctorWorks: doctorWorks,
                   onViewAll: () {
-                    // Navigate to doctor works page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DoctorWorkShowcaseScreen(),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(height: 32.h),
@@ -161,10 +170,18 @@ class _HomeTab extends StatelessWidget {
                 ArticlesSection(
                   articles: articles,
                   onViewAll: () {
-                    // Navigate to articles page
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const DoctorArticlesScreen(),
+                      ),
+                    );
                   },
                   onArticleTap: (article) {
-                    // Navigate to article details
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ArticleDetailsScreen(article: article),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(height: 24.h),
