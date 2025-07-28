@@ -20,14 +20,27 @@ class ArticleCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.only(bottom: 16.h),
+        margin: EdgeInsets.only(bottom: 20.h),
         decoration: BoxDecoration(
-          color: ColorManager.surface,
-          borderRadius: BorderRadius.circular(16.r),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.white,
+              Colors.grey.shade50,
+            ],
+          ),
+          borderRadius: BorderRadius.circular(24.r),
           boxShadow: [
             BoxShadow(
-              color: ColorManager.shadowColor,
-              blurRadius: 8,
+              color: ColorManager.primary.withOpacity(0.08),
+              blurRadius: 25,
+              offset: const Offset(0, 10),
+              spreadRadius: 0,
+            ),
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 10,
               offset: const Offset(0, 2),
             ),
           ],
@@ -38,8 +51,8 @@ class ArticleCard extends StatelessWidget {
             // Article Thumbnail
             ClipRRect(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16.r),
-                topRight: Radius.circular(16.r),
+                topLeft: Radius.circular(24.r),
+                topRight: Radius.circular(24.r),
               ),
               child: Image.network(
                 article.thumbnailUrl,
@@ -51,10 +64,15 @@ class ArticleCard extends StatelessWidget {
                     height: 180.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: ColorManager.backgroundSecondary,
+                      gradient: LinearGradient(
+                        colors: [
+                          ColorManager.primary.withOpacity(0.1),
+                          ColorManager.primary.withOpacity(0.05),
+                        ],
+                      ),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(16.r),
-                        topRight: Radius.circular(16.r),
+                        topLeft: Radius.circular(24.r),
+                        topRight: Radius.circular(24.r),
                       ),
                     ),
                     child: Center(
@@ -72,10 +90,15 @@ class ArticleCard extends StatelessWidget {
                     height: 180.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: ColorManager.backgroundSecondary,
+                      gradient: LinearGradient(
+                        colors: [
+                          ColorManager.primary.withOpacity(0.1),
+                          ColorManager.primary.withOpacity(0.05),
+                        ],
+                      ),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(16.r),
-                        topRight: Radius.circular(16.r),
+                        topLeft: Radius.circular(24.r),
+                        topRight: Radius.circular(24.r),
                       ),
                     ),
                     child: Center(
@@ -100,29 +123,53 @@ class ArticleCard extends StatelessWidget {
                   // Featured Badge
                   if (article.isFeatured)
                     Container(
-                      margin: EdgeInsets.only(bottom: 8.h),
+                      margin: EdgeInsets.only(bottom: 12.h),
                       padding: EdgeInsets.symmetric(
-                        horizontal: 8.w,
-                        vertical: 4.h,
+                        horizontal: 12.w,
+                        vertical: 6.h,
                       ),
                       decoration: BoxDecoration(
-                        color: ColorManager.secondary,
-                        borderRadius: BorderRadius.circular(8.r),
-                      ),
-                      child: Text(
-                        'Featured',
-                        style: TextStyleManager.getMediumStyle(
-                          fontSize: FontSize.s10,
-                          color: ColorManager.onSecondary,
+                        gradient: LinearGradient(
+                          colors: [
+                            ColorManager.secondary,
+                            ColorManager.secondary.withOpacity(0.8),
+                          ],
                         ),
+                        borderRadius: BorderRadius.circular(12.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: ColorManager.secondary.withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.star,
+                            size: 12.sp,
+                            color: ColorManager.onSecondary,
+                          ),
+                          SizedBox(width: 4.w),
+                          Text(
+                            'مميز',
+                            style: TextStyleManager.getSemiBoldStyle(
+                              fontSize: FontSize.s12,
+                              color: ColorManager.onSecondary,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   // Article Title
                   Text(
                     article.title,
-                    style: TextStyleManager.getSemiBoldStyle(
-                      fontSize: FontSize.s16,
+                    style: TextStyleManager.getBoldStyle(
+                      fontSize: FontSize.s18,
                       color: ColorManager.textPrimary,
+                      height: 1.3,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -132,7 +179,7 @@ class ArticleCard extends StatelessWidget {
                   Text(
                     article.shortDescription,
                     style: TextStyleManager.getRegularStyle(
-                      fontSize: FontSize.s14,
+                      fontSize: FontSize.s16,
                       color: ColorManager.textSecondary,
                     ),
                     maxLines: 3,
@@ -214,19 +261,39 @@ class ArticleCard extends StatelessWidget {
                       // Read Time
                       Container(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 8.w,
-                          vertical: 4.h,
+                          horizontal: 12.w,
+                          vertical: 6.h,
                         ),
                         decoration: BoxDecoration(
-                          color: ColorManager.backgroundSecondary,
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: Text(
-                          '${article.readTimeMinutes} ${'home.articles.minRead'.tr()}',
-                          style: TextStyleManager.getRegularStyle(
-                            fontSize: FontSize.s10,
-                            color: ColorManager.textSecondary,
+                          gradient: LinearGradient(
+                            colors: [
+                              ColorManager.primary.withOpacity(0.1),
+                              ColorManager.primary.withOpacity(0.05),
+                            ],
                           ),
+                          borderRadius: BorderRadius.circular(12.r),
+                          border: Border.all(
+                            color: ColorManager.primary.withOpacity(0.2),
+                            width: 1,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.access_time,
+                              size: 12.sp,
+                              color: ColorManager.primary,
+                            ),
+                            SizedBox(width: 4.w),
+                            Text(
+                              '${article.readTimeMinutes} دقيقة',
+                              style: TextStyleManager.getSemiBoldStyle(
+                                fontSize: FontSize.s12,
+                                color: ColorManager.primary,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -240,22 +307,27 @@ class ArticleCard extends StatelessWidget {
                       children: article.tags.take(3).map((tag) {
                         return Container(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 4.h,
+                            horizontal: 12.w,
+                            vertical: 6.h,
                           ),
                           decoration: BoxDecoration(
-                            color: ColorManager.primaryLight.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(8.r),
+                            gradient: LinearGradient(
+                              colors: [
+                                ColorManager.secondary.withOpacity(0.15),
+                                ColorManager.secondary.withOpacity(0.08),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(12.r),
                             border: Border.all(
-                              color: ColorManager.primaryLight.withOpacity(0.3),
+                              color: ColorManager.secondary.withOpacity(0.3),
                               width: 1,
                             ),
                           ),
                           child: Text(
                             tag,
-                            style: TextStyleManager.getRegularStyle(
-                              fontSize: FontSize.s10,
-                              color: ColorManager.primary,
+                            style: TextStyleManager.getSemiBoldStyle(
+                              fontSize: FontSize.s12,
+                              color: ColorManager.secondary,
                             ),
                           ),
                         );
@@ -265,11 +337,44 @@ class ArticleCard extends StatelessWidget {
                   // Read More Button
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Text(
-                      'home.articles.readMore'.tr(),
-                      style: TextStyleManager.getMediumStyle(
-                        fontSize: FontSize.s14,
-                        color: ColorManager.primary,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.w,
+                        vertical: 8.h,
+                      ),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            ColorManager.primary,
+                            ColorManager.primary.withOpacity(0.8),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(12.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: ColorManager.primary.withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'اقرأ المزيد',
+                            style: TextStyleManager.getSemiBoldStyle(
+                              fontSize: FontSize.s14,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(width: 4.w),
+                          Icon(
+                            Icons.arrow_forward,
+                            size: 16.sp,
+                            color: Colors.white,
+                          ),
+                        ],
                       ),
                     ),
                   ),

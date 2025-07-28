@@ -6,8 +6,12 @@ import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../data/models/doctor_work_model.dart';
 import '../../data/models/article_model.dart';
+import '../../data/mock_data_provider.dart';
 import '../widgets/doctor_work_carousel.dart';
 import '../widgets/article_card.dart';
+import '../widgets/articles_section.dart';
+import '../widgets/book_appointment_section.dart';
+import '../widgets/home_app_bar.dart';
 import '../../../../widgets/button_widget.dart';
 
 class PatientHomeScreen extends StatefulWidget {
@@ -118,94 +122,52 @@ class _HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final doctorWorks = MockDataProvider.getDoctorWorks();
+    final articles = MockDataProvider.getArticles();
+
     return Scaffold(
       backgroundColor: ColorManager.backgroundPrimary,
       body: CustomScrollView(
         slivers: [
           // App Bar
-          SliverAppBar(
-            expandedHeight: 120.h,
-            floating: false,
-            pinned: true,
-            backgroundColor: ColorManager.primary,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                'home.welcome'.tr(),
-                style: TextStyleManager.getSemiBoldStyle(
-                  fontSize: FontSize.s18,
-                  color: ColorManager.onPrimary,
-                ),
-              ),
-              background: Container(
-                decoration: BoxDecoration(
-                  gradient: ColorManager.primaryGradient,
-                ),
-                child: SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'home.welcome'.tr(),
-                              style: TextStyleManager.getSemiBoldStyle(
-                                fontSize: FontSize.s24,
-                                color: ColorManager.onPrimary,
-                              ),
-                            ),
-                            Text(
-                              'John Doe', // This should come from user data
-                              style: TextStyleManager.getRegularStyle(
-                                fontSize: FontSize.s16,
-                                color: ColorManager.onPrimary.withOpacity(0.8),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          width: 50.w,
-                          height: 50.h,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: ColorManager.onPrimary.withOpacity(0.2),
-                          ),
-                          child: Icon(
-                            Icons.notifications_outlined,
-                            color: ColorManager.onPrimary,
-                            size: 24.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          HomeAppBar(
+            userName: 'أحمد محمد', // This should come from user data
+            onNotificationTap: () {
+              // Handle notification tap
+            },
           ),
           // Content
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                SizedBox(height: 24.h),
+          SliverPadding(
+            padding: EdgeInsets.only(top: 24.h),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
                 // Doctor Work Carousel
                 DoctorWorkCarousel(
-                  doctorWorks: _getMockDoctorWorks(),
+                  doctorWorks: doctorWorks,
                   onViewAll: () {
                     // Navigate to doctor works page
                   },
                 ),
                 SizedBox(height: 32.h),
                 // Book Appointment CTA
-                _BookAppointmentSection(),
+                BookAppointmentSection(
+                  onBookAppointment: () {
+                    // Navigate to appointment booking
+                  },
+                ),
                 SizedBox(height: 32.h),
                 // Articles Section
-                _ArticlesSection(),
+                ArticlesSection(
+                  articles: articles,
+                  onViewAll: () {
+                    // Navigate to articles page
+                  },
+                  onArticleTap: (article) {
+                    // Navigate to article details
+                  },
+                ),
                 SizedBox(height: 24.h),
-              ],
+              ]),
             ),
           ),
         ],
@@ -213,175 +175,70 @@ class _HomeTab extends StatelessWidget {
     );
   }
 
-  List<DoctorWorkModel> _getMockDoctorWorks() {
-    return [
-      DoctorWorkModel(
-        id: '1',
-        title: 'Dental Implant Restoration',
-        description:
-            'Complete dental implant with crown restoration for missing tooth.',
-        beforeImageUrl: 'https://picsum.photos/400/300?random=1',
-        afterImageUrl: 'https://picsum.photos/400/300?random=2',
-        doctorName: 'Dr. Sarah Ahmed',
-        specialty: 'Dentistry',
-        createdAt: DateTime.now().subtract(const Duration(days: 5)),
-        tags: ['Implant', 'Restoration'],
-      ),
-      DoctorWorkModel(
-        id: '2',
-        title: 'Skin Rejuvenation Treatment',
-        description:
-            'Advanced laser treatment for skin rejuvenation and anti-aging.',
-        beforeImageUrl: 'https://picsum.photos/400/300?random=3',
-        afterImageUrl: 'https://picsum.photos/400/300?random=4',
-        doctorName: 'Dr. Ahmed Hassan',
-        specialty: 'Dermatology',
-        createdAt: DateTime.now().subtract(const Duration(days: 10)),
-        tags: ['Laser', 'Anti-aging'],
-      ),
-    ];
-  }
 }
 
-class _BookAppointmentSection extends StatelessWidget {
+// Enhanced Sliver Components for better performance and modularity
+class _DoctorWorksSliver extends StatelessWidget {
+  final List<DoctorWorkModel> doctorWorks;
+  final VoidCallback? onViewAll;
+
+  const _DoctorWorksSliver({
+    required this.doctorWorks,
+    this.onViewAll,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.w),
-      padding: EdgeInsets.all(24.w),
-      decoration: BoxDecoration(
-        gradient: ColorManager.secondaryGradient,
-        borderRadius: BorderRadius.circular(20.r),
-        boxShadow: [
-          BoxShadow(
-            color: ColorManager.shadowColor,
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'home.appointment.title'.tr(),
-            style: TextStyleManager.getBoldStyle(
-              fontSize: FontSize.s20,
-              color: ColorManager.onSecondary,
-            ),
-          ),
-          SizedBox(height: 8.h),
-          Text(
-            'home.appointment.subtitle'.tr(),
-            style: TextStyleManager.getRegularStyle(
-              fontSize: FontSize.s14,
-              color: ColorManager.onSecondary.withOpacity(0.9),
-            ),
-          ),
-          SizedBox(height: 20.h),
-          SizedBox(
-            width: double.infinity,
-            child: AppButtonWidget(
-              callback: () {
-                // Navigate to appointment booking
-              },
-              label: 'home.appointment.bookNow'.tr(),
-            ),
-          ),
-        ],
+    return SliverToBoxAdapter(
+      child: DoctorWorkCarousel(
+        doctorWorks: doctorWorks,
+        onViewAll: onViewAll,
       ),
     );
   }
 }
 
-class _ArticlesSection extends StatelessWidget {
+class _BookAppointmentSliver extends StatelessWidget {
+  final VoidCallback? onBookAppointment;
+
+  const _BookAppointmentSliver({
+    this.onBookAppointment,
+  });
+
   @override
   Widget build(BuildContext context) {
-    final articles = _getMockArticles();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'home.articles.title'.tr(),
-                style: TextStyleManager.getBoldStyle(
-                  fontSize: FontSize.s18,
-                  color: ColorManager.textPrimary,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  // Navigate to articles page
-                },
-                child: Text(
-                  'home.articles.viewAll'.tr(),
-                  style: TextStyleManager.getMediumStyle(
-                    fontSize: FontSize.s14,
-                    color: ColorManager.primary,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: 16.h),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Column(
-            children: articles.map((article) {
-              return ArticleCard(
-                article: article,
-                onTap: () {
-                  // Navigate to article details
-                },
-              );
-            }).toList(),
-          ),
-        ),
-      ],
+    return SliverToBoxAdapter(
+      child: BookAppointmentSection(
+        onBookAppointment: onBookAppointment,
+      ),
     );
   }
+}
 
-  List<ArticleModel> _getMockArticles() {
-    return [
-      ArticleModel(
-        id: '1',
-        title: '10 Tips for Better Oral Health',
-        shortDescription:
-            'Discover essential tips to maintain excellent oral hygiene and prevent dental problems.',
-        content: 'Full article content here...',
-        thumbnailUrl: 'https://picsum.photos/300/200?random=5',
-        authorName: 'Dr. Sarah Ahmed',
-        authorImageUrl: 'https://picsum.photos/100/100?random=6',
-        publishedAt: DateTime.now().subtract(const Duration(days: 2)),
-        updatedAt: DateTime.now().subtract(const Duration(days: 1)),
-        tags: ['Oral Health', 'Prevention', 'Tips'],
-        readTimeMinutes: 5,
-        isFeatured: true,
+class _ArticlesSliver extends StatelessWidget {
+  final List<ArticleModel> articles;
+  final VoidCallback? onViewAll;
+  final Function(ArticleModel)? onArticleTap;
+
+  const _ArticlesSliver({
+    required this.articles,
+    this.onViewAll,
+    this.onArticleTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: ArticlesSection(
+        articles: articles,
+        onViewAll: onViewAll,
+        onArticleTap: onArticleTap,
       ),
-      ArticleModel(
-        id: '2',
-        title: 'Understanding Skin Care Routines',
-        shortDescription:
-            'Learn about effective skin care routines for different skin types and conditions.',
-        content: 'Full article content here...',
-        thumbnailUrl: 'https://picsum.photos/300/200?random=9',
-        authorName: 'Dr. Fatima Al-Zahra',
-        authorImageUrl: 'https://picsum.photos/100/100?random=10',
-        publishedAt: DateTime.now().subtract(const Duration(days: 5)),
-        updatedAt: DateTime.now().subtract(const Duration(days: 4)),
-        tags: ['Skin Care', 'Dermatology', 'Health'],
-        readTimeMinutes: 8,
-        isFeatured: false,
-      ),
-    ];
+    );
   }
 }
+
+
 
 class _AppointmentsTab extends StatelessWidget {
   const _AppointmentsTab();

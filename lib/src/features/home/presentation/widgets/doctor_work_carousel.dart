@@ -48,7 +48,7 @@ class DoctorWorkCarousel extends StatelessWidget {
         ),
         SizedBox(height: 16.h),
         SizedBox(
-          height: 300.h,
+          height: 330.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -77,12 +77,25 @@ class _DoctorWorkCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: ColorManager.surface,
-        borderRadius: BorderRadius.circular(16.r),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.white,
+            Colors.grey.shade50,
+          ],
+        ),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
-            color: ColorManager.shadowColor,
-            blurRadius: 8,
+            color: ColorManager.primary.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+            spreadRadius: 0,
+          ),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
             offset: const Offset(0, 2),
           ),
         ],
@@ -123,47 +136,75 @@ class _DoctorWorkCard extends StatelessWidget {
                 children: [
                   Text(
                     work.title,
-                    style: TextStyleManager.getSemiBoldStyle(
-                      fontSize: FontSize.s16,
+                    style: TextStyleManager.getBoldStyle(
+                      fontSize: FontSize.s18,
                       color: ColorManager.textPrimary,
                     ),
-                    maxLines: 1,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 4.h),
                   Text(
                     work.description,
                     style: TextStyleManager.getRegularStyle(
-                      fontSize: FontSize.s12,
+                      fontSize: FontSize.s14,
                       color: ColorManager.textSecondary,
                     ),
-                    maxLines: 2,
+                    maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const Spacer(),
                   Row(
                     children: [
-                      Text(
-                        '${'home.doctorWork.by'.tr()} ${work.doctorName}',
-                        style: TextStyleManager.getMediumStyle(
-                          fontSize: FontSize.s12,
-                          color: ColorManager.primary,
+                      Expanded(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 6.w,
+                              height: 6.h,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: ColorManager.primary,
+                              ),
+                            ),
+                            SizedBox(width: 6.w),
+                            Flexible(
+                              child: Text(
+                                work.doctorName,
+                                style: TextStyleManager.getSemiBoldStyle(
+                                  fontSize: FontSize.s14,
+                                  color: ColorManager.primary,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      const Spacer(),
+                      SizedBox(width: 8.w),
                       Container(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 8.w,
-                          vertical: 4.h,
+                          horizontal: 12.w,
+                          vertical: 6.h,
                         ),
                         decoration: BoxDecoration(
-                          color: ColorManager.primaryLight.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(8.r),
+                          gradient: LinearGradient(
+                            colors: [
+                              ColorManager.primary.withOpacity(0.1),
+                              ColorManager.primary.withOpacity(0.05),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(12.r),
+                          border: Border.all(
+                            color: ColorManager.primary.withOpacity(0.2),
+                            width: 1,
+                          ),
                         ),
                         child: Text(
                           work.specialty,
-                          style: TextStyleManager.getRegularStyle(
-                            fontSize: FontSize.s10,
+                          style: TextStyleManager.getSemiBoldStyle(
+                            fontSize: FontSize.s12,
                             color: ColorManager.primary,
                           ),
                         ),
@@ -256,21 +297,33 @@ class _ImageSection extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 8.h,
-            left: 8.w,
+            top: 12.h,
+            left: 12.w,
             child: Container(
               padding: EdgeInsets.symmetric(
-                horizontal: 8.w,
-                vertical: 4.h,
+                horizontal: 12.w,
+                vertical: 6.h,
               ),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.7),
-                borderRadius: BorderRadius.circular(8.r),
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.black.withOpacity(0.8),
+                    Colors.black.withOpacity(0.6),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(12.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               child: Text(
                 label,
-                style: TextStyleManager.getMediumStyle(
-                  fontSize: FontSize.s10,
+                style: TextStyleManager.getSemiBoldStyle(
+                  fontSize: FontSize.s12,
                   color: Colors.white,
                 ),
               ),
