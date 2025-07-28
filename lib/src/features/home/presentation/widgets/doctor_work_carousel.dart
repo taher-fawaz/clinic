@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../core/res/app_res.dart';
 import '../../data/models/doctor_work_model.dart';
+import '../screens/doctor_work_details_screen.dart';
 
 class DoctorWorkCarousel extends StatelessWidget {
   final List<DoctorWorkModel> doctorWorks;
@@ -75,149 +76,157 @@ class _DoctorWorkCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.white,
-            Colors.grey.shade50,
-          ],
-        ),
-        borderRadius: BorderRadius.circular(20.r),
-        boxShadow: [
-          BoxShadow(
-            color: ColorManager.primary.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-            spreadRadius: 0,
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Before/After Images
-          Container(
-            height: 180.h,
-            child: Row(
-              children: [
-                Expanded(
-                  child: _ImageSection(
-                    imageUrl: work.beforeImageUrl,
-                    label: 'home.doctorWork.before'.tr(),
-                  ),
-                ),
-                Container(
-                  width: 1,
-                  color: ColorManager.border,
-                ),
-                Expanded(
-                  child: _ImageSection(
-                    imageUrl: work.afterImageUrl,
-                    label: 'home.doctorWork.after'.tr(),
-                  ),
-                ),
+    return GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => DoctorWorkDetailsScreen(doctorWork: work),
+            ),
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.white,
+                Colors.grey.shade50,
               ],
             ),
+            borderRadius: BorderRadius.circular(20.r),
+            boxShadow: [
+              BoxShadow(
+                color: ColorManager.primary.withOpacity(0.1),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+                spreadRadius: 0,
+              ),
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
-          // Content
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    work.title,
-                    style: TextStyleManager.getBoldStyle(
-                      fontSize: FontSize.s18,
-                      color: ColorManager.textPrimary,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Before/After Images
+              Container(
+                height: 180.h,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: _ImageSection(
+                        imageUrl: work.beforeImageUrl,
+                        label: 'home.doctorWork.before'.tr(),
+                      ),
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 4.h),
-                  Text(
-                    work.description,
-                    style: TextStyleManager.getRegularStyle(
-                      fontSize: FontSize.s14,
-                      color: ColorManager.textSecondary,
+                    Container(
+                      width: 1,
+                      color: ColorManager.border,
                     ),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const Spacer(),
-                  Row(
+                    Expanded(
+                      child: _ImageSection(
+                        imageUrl: work.afterImageUrl,
+                        label: 'home.doctorWork.after'.tr(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Content
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(16.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              width: 6.w,
-                              height: 6.h,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
+                      Text(
+                        work.title,
+                        style: TextStyleManager.getBoldStyle(
+                          fontSize: FontSize.s18,
+                          color: ColorManager.textPrimary,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: 4.h),
+                      Text(
+                        work.description,
+                        style: TextStyleManager.getRegularStyle(
+                          fontSize: FontSize.s14,
+                          color: ColorManager.textSecondary,
+                        ),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const Spacer(),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  width: 6.w,
+                                  height: 6.h,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: ColorManager.primary,
+                                  ),
+                                ),
+                                SizedBox(width: 6.w),
+                                Flexible(
+                                  child: Text(
+                                    work.doctorName,
+                                    style: TextStyleManager.getSemiBoldStyle(
+                                      fontSize: FontSize.s14,
+                                      color: ColorManager.primary,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 8.w),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12.w,
+                              vertical: 6.h,
+                            ),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  ColorManager.primary.withOpacity(0.1),
+                                  ColorManager.primary.withOpacity(0.05),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(12.r),
+                              border: Border.all(
+                                color: ColorManager.primary.withOpacity(0.2),
+                                width: 1,
+                              ),
+                            ),
+                            child: Text(
+                              work.specialty,
+                              style: TextStyleManager.getSemiBoldStyle(
+                                fontSize: FontSize.s12,
                                 color: ColorManager.primary,
                               ),
                             ),
-                            SizedBox(width: 6.w),
-                            Flexible(
-                              child: Text(
-                                work.doctorName,
-                                style: TextStyleManager.getSemiBoldStyle(
-                                  fontSize: FontSize.s14,
-                                  color: ColorManager.primary,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 8.w),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12.w,
-                          vertical: 6.h,
-                        ),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              ColorManager.primary.withOpacity(0.1),
-                              ColorManager.primary.withOpacity(0.05),
-                            ],
                           ),
-                          borderRadius: BorderRadius.circular(12.r),
-                          border: Border.all(
-                            color: ColorManager.primary.withOpacity(0.2),
-                            width: 1,
-                          ),
-                        ),
-                        child: Text(
-                          work.specialty,
-                          style: TextStyleManager.getSemiBoldStyle(
-                            fontSize: FontSize.s12,
-                            color: ColorManager.primary,
-                          ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }
 

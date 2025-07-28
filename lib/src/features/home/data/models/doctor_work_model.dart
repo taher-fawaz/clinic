@@ -8,6 +8,8 @@ class DoctorWorkModel extends Equatable {
   final String afterImageUrl;
   final String doctorName;
   final String specialty;
+  final String treatmentType;
+  final String duration;
   final DateTime createdAt;
   final List<String> tags;
 
@@ -19,6 +21,8 @@ class DoctorWorkModel extends Equatable {
     required this.afterImageUrl,
     required this.doctorName,
     required this.specialty,
+    required this.treatmentType,
+    required this.duration,
     required this.createdAt,
     required this.tags,
   });
@@ -32,6 +36,8 @@ class DoctorWorkModel extends Equatable {
       afterImageUrl: json['afterImageUrl'] as String,
       doctorName: json['doctorName'] as String,
       specialty: json['specialty'] as String,
+      treatmentType: json['treatmentType'] as String,
+      duration: json['duration'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       tags: List<String>.from(json['tags'] as List),
     );
@@ -46,6 +52,8 @@ class DoctorWorkModel extends Equatable {
       'afterImageUrl': afterImageUrl,
       'doctorName': doctorName,
       'specialty': specialty,
+      'treatmentType': treatmentType,
+      'duration': duration,
       'createdAt': createdAt.toIso8601String(),
       'tags': tags,
     };
@@ -59,6 +67,8 @@ class DoctorWorkModel extends Equatable {
     String? afterImageUrl,
     String? doctorName,
     String? specialty,
+    String? treatmentType,
+    String? duration,
     DateTime? createdAt,
     List<String>? tags,
   }) {
@@ -70,6 +80,8 @@ class DoctorWorkModel extends Equatable {
       afterImageUrl: afterImageUrl ?? this.afterImageUrl,
       doctorName: doctorName ?? this.doctorName,
       specialty: specialty ?? this.specialty,
+      treatmentType: treatmentType ?? this.treatmentType,
+      duration: duration ?? this.duration,
       createdAt: createdAt ?? this.createdAt,
       tags: tags ?? this.tags,
     );
@@ -84,6 +96,8 @@ class DoctorWorkModel extends Equatable {
         afterImageUrl,
         doctorName,
         specialty,
+        treatmentType,
+        duration,
         createdAt,
         tags,
       ];

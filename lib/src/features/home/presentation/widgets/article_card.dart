@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../core/res/app_res.dart';
 import '../../data/models/article_model.dart';
+import '../screens/article_details_screen.dart';
 
 class ArticleCard extends StatelessWidget {
   final ArticleModel article;
@@ -337,44 +338,55 @@ class ArticleCard extends StatelessWidget {
                   // Read More Button
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 8.h,
-                      ),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            ColorManager.primary,
-                            ColorManager.primary.withOpacity(0.8),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(12.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: ColorManager.primary.withOpacity(0.3),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'اقرأ المزيد',
-                            style: TextStyleManager.getSemiBoldStyle(
-                              fontSize: FontSize.s14,
-                              color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ArticleDetailsScreen(
+                              article: article,
                             ),
                           ),
-                          SizedBox(width: 4.w),
-                          Icon(
-                            Icons.arrow_forward,
-                            size: 16.sp,
-                            color: Colors.white,
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                          vertical: 8.h,
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              ColorManager.primary,
+                              ColorManager.primary.withOpacity(0.8),
+                            ],
                           ),
-                        ],
+                          borderRadius: BorderRadius.circular(12.r),
+                          boxShadow: [
+                            BoxShadow(
+                              color: ColorManager.primary.withOpacity(0.3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'اقرأ المزيد',
+                              style: TextStyleManager.getSemiBoldStyle(
+                                fontSize: FontSize.s14,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(width: 4.w),
+                            Icon(
+                              Icons.arrow_forward,
+                              size: 16.sp,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
