@@ -4,6 +4,7 @@ import 'package:clinic/src/features/appointment/presentation/screens/appointment
 import 'package:clinic/src/features/appointment/presentation/screens/book_appointment_screen.dart';
 import 'package:clinic/src/features/home/presentation/widgets/book_appointment_section.dart';
 import 'package:clinic/src/features/patient_medical_record/presentation/screens/patient_medical_record_screen.dart';
+import 'package:clinic/src/features/profile/presentation/pages/patient_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -567,15 +568,7 @@ class _ProfileTab extends StatelessWidget {
         backgroundColor: ColorManager.primary,
         elevation: 0,
       ),
-      body: Center(
-        child: Text(
-          'Profile page - Coming Soon',
-          style: TextStyleManager.getRegularStyle(
-            fontSize: FontSize.s16,
-            color: ColorManager.textSecondary,
-          ),
-        ),
-      ),
+      body:PatientProfileScreen()
     );
   }
 }

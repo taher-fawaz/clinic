@@ -246,6 +246,186 @@
     "fri": "Fri",
     "sat": "Sat"
   },
+  "profile": {
+    "title": "Profile",
+    "personalInfo": {
+      "title": "Personal Information",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "age": "Age",
+      "years": "years",
+      "ageUnknown": "Age unknown"
+    },
+    "settings": {
+      "title": "Settings",
+      "language": "Language",
+      "languageDescription": "Choose your preferred language",
+      "address": "Address & Location",
+      "addressDescription": "Manage your address details",
+      "notifications": "Notifications",
+      "manageNotifications": "Manage notification preferences"
+    },
+    "notifications": {
+      "comingSoon": "Notification settings coming soon!"
+    },
+    "security": {
+      "title": "Security",
+      "changePassword": "Change Password",
+      "passwordDescription": "Update your account password",
+      "passwordSecurity": "Password Security",
+      "currentPassword": "Current Password",
+      "enterCurrentPassword": "Enter your current password",
+      "newPassword": "New Password",
+      "enterNewPassword": "Enter your new password",
+      "confirmPassword": "Confirm Password",
+      "confirmNewPassword": "Confirm your new password",
+      "currentPasswordRequired": "Current password is required",
+      "newPasswordRequired": "New password is required",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordTooShort": "Password must be at least 8 characters",
+      "passwordWeak": "Password must meet all requirements",
+      "passwordsDoNotMatch": "Passwords do not match",
+      "updatePassword": "Update Password",
+      "passwordUpdated": "Password updated successfully",
+      "passwordUpdateError": "Failed to update password",
+      "passwordRequirements": "Password Requirements:",
+      "minLength": "At least 8 characters",
+      "hasUppercase": "One uppercase letter",
+      "hasLowercase": "One lowercase letter",
+      "hasNumber": "One number",
+      "hasSpecialChar": "One special character"
+    },
+    "legal": {
+      "title": "Legal",
+      "termsSubtitle": "View our terms of service",
+      "privacySubtitle": "View our privacy policy",
+      "termsAndPrivacy": "Terms & Privacy",
+      "termsDescription": "View terms of service and privacy policy",
+      "termsOfService": "Terms of Service",
+      "privacyPolicy": "Privacy Policy",
+      "terms": {
+        "title": "Terms of Service",
+        "lastUpdated": "Last updated: January 2024",
+        "acceptance": {
+          "title": "1. Acceptance of Terms",
+          "content": "By accessing and using this clinic application, you accept and agree to be bound by the terms and provision of this agreement."
+        },
+        "services": {
+          "title": "2. Use of Services",
+          "content": "This application provides medical appointment booking and health record management services. You agree to use these services only for lawful purposes and in accordance with these terms."
+        },
+        "userAccount": {
+          "title": "3. User Account",
+          "content": "You are responsible for maintaining the confidentiality of your account and password. You agree to accept responsibility for all activities that occur under your account."
+        },
+        "medicalInfo": {
+          "title": "4. Medical Information",
+          "content": "All medical information provided through this application is confidential and protected under applicable privacy laws. We are committed to maintaining the privacy and security of your health information."
+        },
+        "appointments": {
+          "title": "5. Appointments",
+          "content": "Appointment bookings are subject to doctor availability. Cancellations must be made at least 24 hours in advance. No-shows may result in charges."
+        },
+        "liability": {
+          "title": "6. Limitation of Liability",
+          "content": "This application is a tool to facilitate medical appointments and record keeping. It does not replace professional medical advice, diagnosis, or treatment."
+        },
+        "termination": {
+          "title": "7. Termination",
+          "content": "We reserve the right to terminate or suspend your account at any time for violations of these terms or for any other reason deemed necessary."
+        },
+        "changes": {
+          "title": "8. Changes to Terms",
+          "content": "We reserve the right to modify these terms at any time. Changes will be effective immediately upon posting in the application."
+        },
+        "contact": {
+          "title": "9. Contact Information",
+          "content": "If you have any questions about these Terms of Service, please contact us at support@clinicapp.com."
+        }
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "lastUpdated": "Last updated: January 2024",
+        "introduction": {
+          "title": "1. Introduction",
+          "content": "This Privacy Policy describes how we collect, use, and protect your personal and medical information when you use our clinic application."
+        },
+        "dataCollection": {
+          "title": "2. Information We Collect",
+          "content": "We collect personal information such as name, contact details, medical history, and appointment data to provide our services effectively."
+        },
+        "dataUsage": {
+          "title": "3. How We Use Your Information",
+          "content": "Your information is used to schedule appointments, maintain medical records, communicate with healthcare providers, and improve our services."
+        },
+        "dataSharing": {
+          "title": "4. Information Sharing",
+          "content": "We do not sell or rent your personal information. Medical information is only shared with authorized healthcare providers involved in your care."
+        },
+        "dataSecurity": {
+          "title": "5. Data Security",
+          "content": "We implement industry-standard security measures to protect your information, including encryption, secure servers, and access controls."
+        },
+        "userRights": {
+          "title": "6. Your Rights",
+          "content": "You have the right to access, update, or delete your personal information. You may also request a copy of your data or restrict its processing."
+        },
+        "cookies": {
+          "title": "7. Cookies and Tracking",
+          "content": "We use cookies and similar technologies to improve user experience, analyze usage patterns, and maintain session security."
+        },
+        "thirdParty": {
+          "title": "8. Third-Party Services",
+          "content": "Our application may integrate with third-party services for enhanced functionality. These services have their own privacy policies."
+        },
+        "children": {
+          "title": "9. Children's Privacy",
+          "content": "Our services are not intended for children under 13. We do not knowingly collect personal information from children under 13."
+        },
+        "changes": {
+          "title": "10. Policy Changes",
+          "content": "We may update this Privacy Policy periodically. We will notify you of significant changes through the application or email."
+        },
+        "contact": {
+          "title": "11. Contact Us",
+          "content": "If you have questions about this Privacy Policy or your data, please contact us at privacy@clinicapp.com."
+        }
+      }
+    },
+    "actions": {
+      "logout": "Logout",
+      "logoutConfirm": "Are you sure you want to logout?",
+      "logoutSuccess": "Logged out successfully"
+    },
+    "language": {
+      "english": "English",
+      "arabic": "العربية",
+      "current": "Current Language",
+      "select": "Select Language"
+    },
+    "address": {
+      "title": "Address Information",
+      "street": "Street Address",
+      "streetHint": "Enter your street address",
+      "city": "City",
+      "cityHint": "Enter your city",
+      "state": "State/Province",
+      "stateHint": "Enter your state or province",
+      "postalCode": "Postal Code",
+      "postalCodeHint": "Enter your postal code",
+      "country": "Country",
+      "countryHint": "Enter your country",
+      "saveAddress": "Save Address",
+      "addressSaved": "Address saved successfully",
+      "addressSaveError": "Failed to save address",
+      "streetRequired": "Street address is required",
+      "cityRequired": "City is required",
+      "stateRequired": "State/Province is required",
+      "postalCodeRequired": "Postal code is required",
+      "countryRequired": "Country is required"
+    }
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",
